@@ -57,11 +57,32 @@ TEST_F(ApplicationConnectingTestSuite, shallSendAttachRequestUponReceivingSIB)
     // implemented in Constructor of TestSuite
 }
 
-TEST_F(ApplicationConnectingTestSuite, shallShowConnectedOnAttachAccept)
+TEST_F(ApplicationConnectingTestSuite, shallShowNotConnectedOnAttachReject)
 {
-    EXPECT_CALL(userPortMock, showConnected());
+    EXPECT_CALL(userPortMock, showNotConnected());
     EXPECT_CALL(timerPortMock, stopTimer());
-    objectUnderTest.handleAttachAccept();
+    objectUnderTest.handleAttachReject();
+}
+
+TEST_F(ApplicationConnectingTestSuite, shallShowNotConnectedOnTimeout)
+{
+    EXPECT_CALL(userPortMock, showNotConnected());
+    objectUnderTest.handleTimeout();
+}
+
+struct ApplicationConnectedTestSuite : ApplicationConnectingTestSuite
+{
+    ApplicationConnectedTestSuite()
+    {
+        EXPECT_CALL(userPortMock, showConnected());
+        EXPECT_CALL(timerPortMock, stopTimer());
+        objectUnderTest.handleAttachAccept();
+    }
+};
+
+TEST_F(ApplicationConnectedTestSuite, shallShowConnectedOnAttachAccept)
+{
+    // implemented in constructor of test-suite
 }
 
 

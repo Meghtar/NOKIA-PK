@@ -1,5 +1,6 @@
 #include "NotConnectedState.hpp"
-#include "ConnectedState.hpp"
+#include "ConnectingState.hpp"
+
 namespace ue
 {
 
@@ -11,7 +12,8 @@ NotConnectedState::NotConnectedState(Context &context)
 
 void NotConnectedState::handleSib(common::BtsId btsId)
 {
-    context.setState<ConnectedState>(btsId);
+    context.logger.logDebug("Received sib: ", btsId);
+    context.setState<ConnectingState>(btsId);
 }
 
 }
