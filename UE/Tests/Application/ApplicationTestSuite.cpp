@@ -57,6 +57,13 @@ TEST_F(ApplicationConnectingTestSuite, shallSendAttachRequestUponReceivingSIB)
     // implemented in Constructor of TestSuite
 }
 
+TEST_F(ApplicationConnectingTestSuite, shallShowNotConnectingOnDisconnect)
+{
+    EXPECT_CALL(userPortMock, showNotConnected());
+    objectUnderTest.handleDisconnected();
+}
+
+
 TEST_F(ApplicationConnectingTestSuite, shallShowNotConnectedOnAttachReject)
 {
     EXPECT_CALL(userPortMock, showNotConnected());
