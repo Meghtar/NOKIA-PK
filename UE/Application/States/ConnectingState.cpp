@@ -33,4 +33,10 @@ void ue::ConnectingState::handleTimeout()
     context.setState<NotConnectedState>();
 }
 
+void ue::ConnectingState::handleDisconnected()
+{
+    context.logger.logInfo("Disconnecting");
+    context.setState<NotConnectedState>();
+}
+
 }
