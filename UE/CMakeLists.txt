@@ -8,10 +8,12 @@ set(UE_APP_DIR ${UE_DIR}/Application)
 set(UE_APPENV_DIR ${UE_DIR}/ApplicationEnvironment)
 set(UE_QTAPPENV_DIR ${UE_DIR}/QtApplicationEnvironment)
 set(COMMON_DIR ${UE_DIR}/../COMMON)
+set(SQLITE_DIR ${UE_DIR}/sqlite_orm)
 
 include_directories(${UE_APP_DIR})
 include_directories(${UE_APPENV_DIR})
 include_directories(${COMMON_DIR})
+include_directories(${SQLITE_DIR})
 
 add_subdirectory(Application)
 add_subdirectory(ApplicationEnvironment)

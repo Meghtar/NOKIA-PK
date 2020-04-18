@@ -5,6 +5,7 @@
 #include "Config/MultiLineConfig.hpp"
 #include "Messages/OutgoingMessage.hpp"
 #include "Messages/IncomingMessage.hpp"
+#include "Ports/DbPort.hpp"
 #include <functional>
 
 namespace ue
