@@ -3,6 +3,7 @@
 #include "Ports/BtsPort.hpp"
 #include "Ports/UserPort.hpp"
 #include "Ports/TimerPort.hpp"
+#include "Ports/DbPort.hpp"
 
 int main(int argc, char* argv[])
 {
