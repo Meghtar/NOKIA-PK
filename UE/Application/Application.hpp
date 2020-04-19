@@ -18,7 +18,8 @@ public:
                 ILogger& iLogger,
                 IBtsPort& bts,
                 IUserPort& user,
-                ITimerPort& timer);
+                ITimerPort& timer,
+                IDbPort& db);
     ~Application();
 
     // ITimerEventsHandler interface
