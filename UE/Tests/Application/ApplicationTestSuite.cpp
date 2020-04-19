@@ -6,6 +6,7 @@
 #include "Mocks/IBtsPortMock.hpp"
 #include "Mocks/IUserPortMock.hpp"
 #include "Mocks/ITimerPortMock.hpp"
+#include "Mocks/IDbPortMock.hpp"
 #include "Messages/PhoneNumber.hpp"
 #include <memory>
 
@@ -22,6 +23,7 @@ protected:
     StrictMock<IBtsPortMock> btsPortMock;
     StrictMock<IUserPortMock> userPortMock;
     StrictMock<ITimerPortMock> timerPortMock;
+    StrictMock<IDbPortMock> dbPortMock;
 
     Expectation notConnectedExpectation = EXPECT_CALL(userPortMock, showNotConnected());
 
@@ -29,7 +31,8 @@ protected:
                                 loggerMock,
                                 btsPortMock,
                                 userPortMock,
-                                timerPortMock};
+                                timerPortMock,
+                                dbPortMock};
 };
 
 struct ApplicationNotConnectedTestSuite : ApplicationTestSuite
@@ -91,6 +94,5 @@ TEST_F(ApplicationConnectedTestSuite, shallShowConnectedOnAttachAccept)
 {
     // implemented in constructor of test-suite
 }
-
 
 }

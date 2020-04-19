@@ -23,7 +23,11 @@ class DbPort : public IDbPort
 {
 public:
     DbPort(int number);
-    int saveMessageToDb(const message& msg);
+    int saveMessageToDb(const message& msg) override;
+    std::vector<message> getAllMessages() override;
+    message getMessageById(int message_id) override;
+    void removeMessageById(int message_id) override;
+    void removeAllMessages() override;
 private:
     std::string _dbPath;
     const int _number;
