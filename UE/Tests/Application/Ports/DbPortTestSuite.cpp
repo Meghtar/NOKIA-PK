@@ -16,8 +16,21 @@ protected:
     StrictMock<IDbPortMock> dbPortMock;
 
     int phoneNumber = 123;
-
     DbPort objectUnderTest{phoneNumber};
+
+    int messageId = 100;
+    int senderNumber = 111;
+    int receiverNumber = phoneNumber;
+    std::string messageText = "example";
+    bool messageRead = false;
+
+    message testMessage{
+        messageId,
+        senderNumber,
+        receiverNumber,
+        messageText,
+        messageRead
+    };
 
     DbPortTestSuite()
     {}
@@ -29,17 +42,46 @@ protected:
 
 TEST_F(DbPortTestSuite, shallSaveOneMessage)
 {
-    int messageId = 100;
-    int senderNumber = 111;
-    int receiverNumber = phoneNumber;
-    std::string messageText = "example";
-    bool messageRead = false;
-    message msg{messageId, senderNumber, receiverNumber, messageText, messageRead};
-    objectUnderTest.saveMessageToDb(msg);
+    objectUnderTest.saveMessageToDb(testMessage);
 
     auto allMessages = objectUnderTest.getAllMessages();
 
     EXPECT_EQ(allMessages.size(), 1);
-    ASSERT_TRUE(allMessages[0] == msg);
+    ASSERT_TRUE(allMessages[0] == testMessage);
+}
+
+TEST_F(DbPortTestSuite, shallSaveMultipleMessages)
+{
+    int amountOfMessages = 10;
+    for (int i = 0; i < amountOfMessages; ++i)
+        objectUnderTest.saveMessageToDb(testMessage);
+
+    auto allMessages = objectUnderTest.getAllMessages();
+
+    EXPECT_EQ(allMessages.size(), amountOfMessages);
+}
+
+TEST_F(DbPortTestSuite, shallDeleteSingleMessage)
+{
+    int id = objectUnderTest.saveMessageToDb(testMessage);
+
+    objectUnderTest.removeMessageById(id);
+
+    auto allMessages = objectUnderTest.getAllMessages();
+
+    EXPECT_EQ(allMessages.size(), 0);
+}
+
+TEST_F(DbPortTestSuite, shallDeleteAllMessages)
+{
+    int amountOfMessages = 10;
+    for (int i = 0; i < amountOfMessages; ++i)
+        objectUnderTest.saveMessageToDb(testMessage);
+
+    objectUnderTest.removeAllMessages();
+
+    auto allMessages = objectUnderTest.getAllMessages();
+
+    EXPECT_EQ(allMessages.size(), 0);
 }
 }
