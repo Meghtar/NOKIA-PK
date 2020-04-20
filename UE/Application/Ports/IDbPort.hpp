@@ -1,11 +1,11 @@
 #pragma once
 #include <string>
 #include <vector>
-
+#include "Messages/PhoneNumber.hpp"
+#include "IDbPort.hpp"
 namespace ue
 {
 
-// TODO: change sender and receiverNumber type into phoneNumber
 struct message
 {
     int messageId;
@@ -22,13 +22,14 @@ struct message
             return true;
         return false;
     }
+
 };
 
 class IDbPort
 {
 public:
     virtual ~IDbPort() = default;
-    virtual int saveMessageToDb(const message& msg) = 0;
+    virtual int saveMessageToDb(const common::PhoneNumber, std::string, bool) = 0;
     virtual std::vector<message> getAllMessages() = 0;
     virtual message getMessageById(int message_id) = 0;
     virtual void removeMessageById(int message_id) = 0;

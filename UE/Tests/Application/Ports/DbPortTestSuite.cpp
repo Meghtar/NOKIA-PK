@@ -42,7 +42,8 @@ protected:
 
 TEST_F(DbPortTestSuite, shallSaveOneMessage)
 {
-    objectUnderTest.saveMessageToDb(testMessage);
+    common::PhoneNumber phoneNumber{123};
+    objectUnderTest.saveMessageToDb(phoneNumber, "a", false);
 
     auto allMessages = objectUnderTest.getAllMessages();
 
@@ -52,9 +53,10 @@ TEST_F(DbPortTestSuite, shallSaveOneMessage)
 
 TEST_F(DbPortTestSuite, shallSaveMultipleMessages)
 {
+    common::PhoneNumber phoneNumber{123};
     int amountOfMessages = 10;
     for (int i = 0; i < amountOfMessages; ++i)
-        objectUnderTest.saveMessageToDb(testMessage);
+        objectUnderTest.saveMessageToDb(phoneNumber, "a", false);
 
     auto allMessages = objectUnderTest.getAllMessages();
 
@@ -63,7 +65,8 @@ TEST_F(DbPortTestSuite, shallSaveMultipleMessages)
 
 TEST_F(DbPortTestSuite, shallDeleteSingleMessage)
 {
-    int id = objectUnderTest.saveMessageToDb(testMessage);
+    common::PhoneNumber phoneNumber{123};
+    int id = objectUnderTest.saveMessageToDb(phoneNumber, "a", false);
 
     objectUnderTest.removeMessageById(id);
 
@@ -74,9 +77,10 @@ TEST_F(DbPortTestSuite, shallDeleteSingleMessage)
 
 TEST_F(DbPortTestSuite, shallDeleteAllMessages)
 {
+    common::PhoneNumber phoneNumber{123};
     int amountOfMessages = 10;
     for (int i = 0; i < amountOfMessages; ++i)
-        objectUnderTest.saveMessageToDb(testMessage);
+        objectUnderTest.saveMessageToDb(phoneNumber, "a", false);
 
     objectUnderTest.removeAllMessages();
 

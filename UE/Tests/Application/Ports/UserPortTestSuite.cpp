@@ -35,6 +35,7 @@ protected:
 
 TEST_F(UserPortTestSuite, shallStartStop)
 {
+
 }
 
 TEST_F(UserPortTestSuite, shallShowNotConnected)
