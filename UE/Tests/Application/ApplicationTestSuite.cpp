@@ -17,7 +17,7 @@ using namespace ::testing;
 class ApplicationTestSuite : public Test
 {
 protected:
-    common::PhoneNumber receiverNumber {111};
+    const common::PhoneNumber receiverNumber {111};
     const common::PhoneNumber PHONE_NUMBER{112};
     const common::BtsId BTS_ID{203};
     NiceMock<common::ILoggerMock> loggerMock;
@@ -96,7 +96,7 @@ TEST_F(ApplicationConnectedTestSuite, shallHandleSendSms)
 {
     auto msg = "example";
     EXPECT_CALL(btsPortMock, sendSms(receiverNumber, msg));
-    EXPECT_CALL(dbPortMock, saveMessageToDb(receiverNumber, msg, true));
+    EXPECT_CALL(dbPortMock, saveMessageToDb(receiverNumber, msg, outgoing));
     objectUnderTest.handleSendSms(receiverNumber, msg);
 }
 

@@ -16,8 +16,8 @@ using namespace ::testing;
 class BtsPortTestSuite : public Test
 {
 protected:
-    common::PhoneNumber senderNumber {111};
-    common::PhoneNumber receiverNumber {110};
+    const common::PhoneNumber senderNumber {111};
+    const common::PhoneNumber receiverNumber {110};
     const common::PhoneNumber PHONE_NUMBER{112};
     const common::BtsId BTS_ID{13121981ll};
     NiceMock<common::ILoggerMock> loggerMock;

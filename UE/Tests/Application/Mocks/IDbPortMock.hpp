@@ -13,7 +13,7 @@ public:
     IDbPortMock();
     ~IDbPortMock() override;
 
-    MOCK_METHOD(int, saveMessageToDb, (const common::PhoneNumber phoneNumber, std::string text, bool isSender), (final));
+    MOCK_METHOD(int, saveMessageToDb, (const common::PhoneNumber, std::string, isSender), (final));
     MOCK_METHOD(std::vector<message>, getAllMessages, (), (final));
     MOCK_METHOD(message, getMessageById, (int), (final));
     MOCK_METHOD(void, removeMessageById, (int), (final));

@@ -10,11 +10,17 @@ DbPort::DbPort(int number) : _number(number)
     _db->sync_schema(true);
 }
 
-int DbPort::saveMessageToDb(const common::PhoneNumber phoneNumber, std::string text, bool isSender)
+int DbPort::saveMessageToDb(const common::PhoneNumber phoneNumber, std::string text, isSender val)
 {
-    int senderNumber = isSender ? _number : phoneNumber.value;
-    int receiverNumber = not isSender ? _number : phoneNumber.value;
-
+    int receiverNumber, senderNumber;
+    if(val == isSender::outgoing)
+    {
+        senderNumber = _number;
+        receiverNumber = phoneNumber.value;
+    } else {
+        receiverNumber = _number;
+        senderNumber = phoneNumber.value;
+    }
     message msg {/*Autoincrement */ -1, senderNumber, receiverNumber, text, false};
     return _db->insert(msg);
 }

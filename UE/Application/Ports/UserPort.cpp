@@ -19,7 +19,6 @@ void UserPort::start(IUserEventsHandler &handler)
 void UserPort::stop()
 {
     handler = nullptr;
-
 }
 
 void UserPort::showNotConnected()
@@ -38,19 +37,15 @@ void UserPort::showConnected()
     menu.clearSelectionList();
     menu.addSelectionListItem("Compose SMS", "");
     menu.addSelectionListItem("View SMS", "");
-
 }
 
 void UserPort::handleComposeSms()
 {
     IUeGui::ISmsComposeMode& smsView = gui.setSmsComposeMode();
-
-
 }
 
 void UserPort::handleSmsListView() {
     IUeGui::ITextMode& viewSms = gui.setViewTextMode();
 }
-
 
 }

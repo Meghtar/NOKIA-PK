@@ -34,7 +34,7 @@ protected:
 
 TEST_F(DbPortTestSuite, shallSaveOneMessage)
 {
-    objectUnderTest.saveMessageToDb(phoneNumber, messageText, false);
+    objectUnderTest.saveMessageToDb(phoneNumber, messageText, outgoing);
 
     auto allMessages = objectUnderTest.getAllMessages();
     EXPECT_EQ(allMessages.size(), 1);
@@ -44,7 +44,7 @@ TEST_F(DbPortTestSuite, shallSaveOneMessage)
 
 TEST_F(DbPortTestSuite, shallSaveOutgoingMessage)
 {
-    objectUnderTest.saveMessageToDb(senderNumber, messageText, true);
+    objectUnderTest.saveMessageToDb(senderNumber, messageText, outgoing);
 
     auto allMessages = objectUnderTest.getAllMessages();
     EXPECT_EQ(allMessages.size(), 1);
@@ -54,7 +54,7 @@ TEST_F(DbPortTestSuite, shallSaveOutgoingMessage)
 
 TEST_F(DbPortTestSuite, shallSaveIncomingMessage)
 {
-    objectUnderTest.saveMessageToDb(senderNumber, messageText, false);
+    objectUnderTest.saveMessageToDb(senderNumber, messageText, incoming);
 
     auto allMessages = objectUnderTest.getAllMessages();
     EXPECT_EQ(allMessages.size(), 1);
@@ -66,7 +66,7 @@ TEST_F(DbPortTestSuite, shallSaveMultipleMessages)
 {
     int amountOfMessages = 10;
     for (int i = 0; i < amountOfMessages; ++i)
-        objectUnderTest.saveMessageToDb(phoneNumber, "a", false);
+        objectUnderTest.saveMessageToDb(phoneNumber, messageText, outgoing);
 
     auto allMessages = objectUnderTest.getAllMessages();
 
@@ -75,7 +75,7 @@ TEST_F(DbPortTestSuite, shallSaveMultipleMessages)
 
 TEST_F(DbPortTestSuite, shallDeleteSingleMessage)
 {
-    int id = objectUnderTest.saveMessageToDb(phoneNumber, "a", false);
+    int id = objectUnderTest.saveMessageToDb(phoneNumber, messageText, outgoing);
 
     objectUnderTest.removeMessageById(id);
 
@@ -88,7 +88,7 @@ TEST_F(DbPortTestSuite, shallDeleteAllMessages)
 {
     int amountOfMessages = 10;
     for (int i = 0; i < amountOfMessages; ++i)
-        objectUnderTest.saveMessageToDb(phoneNumber, "a", false);
+        objectUnderTest.saveMessageToDb(phoneNumber, messageText, outgoing);
 
     objectUnderTest.removeAllMessages();
 
