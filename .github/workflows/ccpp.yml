@@ -32,4 +32,8 @@ jobs:
     - name: UT for UeApplication
       run: make UeApplicationUT
 
+    - name: UT for COMMON
+      run: ./COMMON/Tests/COMMON_UT
 
+    - name: UT for UE
+      run: ./UE/Tests/Application/UeApplicationUT

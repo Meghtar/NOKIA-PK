@@ -3,6 +3,7 @@
 #include "Ports/ITimerPort.hpp"
 #include "Ports/IBtsPort.hpp"
 #include "Ports/IUserPort.hpp"
+#include "Ports/IDbPort.hpp"
 
 
 namespace ue

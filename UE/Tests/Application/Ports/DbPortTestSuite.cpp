@@ -15,22 +15,14 @@ protected:
     NiceMock<common::ILoggerMock> loggerMock;
     StrictMock<IDbPortMock> dbPortMock;
 
-    int phoneNumber = 123;
-    DbPort objectUnderTest{phoneNumber};
+    common::PhoneNumber phoneNumber {123};
+    DbPort objectUnderTest{phoneNumber.value};
 
     int messageId = 100;
-    int senderNumber = 111;
-    int receiverNumber = phoneNumber;
+    common::PhoneNumber senderNumber {111};
+    common::PhoneNumber receiverNumber = phoneNumber;
     std::string messageText = "example";
     bool messageRead = false;
-
-    message testMessage{
-        messageId,
-        senderNumber,
-        receiverNumber,
-        messageText,
-        messageRead
-    };
 
     DbPortTestSuite()
     {}
@@ -42,11 +34,31 @@ protected:
 
 TEST_F(DbPortTestSuite, shallSaveOneMessage)
 {
-    objectUnderTest.saveMessageToDb(testMessage);
+    objectUnderTest.saveMessageToDb(phoneNumber, messageText, outgoing);
 
     auto allMessages = objectUnderTest.getAllMessages();
-
     EXPECT_EQ(allMessages.size(), 1);
+    message testMessage {1, phoneNumber.value, 0, messageText, false};
+    ASSERT_TRUE(allMessages[0] == testMessage);
+}
+
+TEST_F(DbPortTestSuite, shallSaveOutgoingMessage)
+{
+    objectUnderTest.saveMessageToDb(senderNumber, messageText, outgoing);
+
+    auto allMessages = objectUnderTest.getAllMessages();
+    EXPECT_EQ(allMessages.size(), 1);
+    message testMessage {1, receiverNumber.value, senderNumber.value, messageText, false};
+    ASSERT_TRUE(allMessages[0] == testMessage);
+}
+
+TEST_F(DbPortTestSuite, shallSaveIncomingMessage)
+{
+    objectUnderTest.saveMessageToDb(senderNumber, messageText, incoming);
+
+    auto allMessages = objectUnderTest.getAllMessages();
+    EXPECT_EQ(allMessages.size(), 1);
+    message testMessage {1, senderNumber.value, receiverNumber.value, messageText, false};
     ASSERT_TRUE(allMessages[0] == testMessage);
 }
 
@@ -54,7 +66,7 @@ TEST_F(DbPortTestSuite, shallSaveMultipleMessages)
 {
     int amountOfMessages = 10;
     for (int i = 0; i < amountOfMessages; ++i)
-        objectUnderTest.saveMessageToDb(testMessage);
+        objectUnderTest.saveMessageToDb(phoneNumber, messageText, outgoing);
 
     auto allMessages = objectUnderTest.getAllMessages();
 
@@ -63,7 +75,7 @@ TEST_F(DbPortTestSuite, shallSaveMultipleMessages)
 
 TEST_F(DbPortTestSuite, shallDeleteSingleMessage)
 {
-    int id = objectUnderTest.saveMessageToDb(testMessage);
+    int id = objectUnderTest.saveMessageToDb(phoneNumber, messageText, outgoing);
 
     objectUnderTest.removeMessageById(id);
 
@@ -76,7 +88,7 @@ TEST_F(DbPortTestSuite, shallDeleteAllMessages)
 {
     int amountOfMessages = 10;
     for (int i = 0; i < amountOfMessages; ++i)
-        objectUnderTest.saveMessageToDb(testMessage);
+        objectUnderTest.saveMessageToDb(phoneNumber, messageText, outgoing);
 
     objectUnderTest.removeAllMessages();
 
