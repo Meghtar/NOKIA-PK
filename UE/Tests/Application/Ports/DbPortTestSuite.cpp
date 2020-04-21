@@ -15,22 +15,14 @@ protected:
     NiceMock<common::ILoggerMock> loggerMock;
     StrictMock<IDbPortMock> dbPortMock;
 
-    int phoneNumber = 123;
-    DbPort objectUnderTest{phoneNumber};
+    common::PhoneNumber phoneNumber {123};
+    DbPort objectUnderTest{phoneNumber.value};
 
     int messageId = 100;
-    int senderNumber = 111;
-    int receiverNumber = phoneNumber;
+    common::PhoneNumber senderNumber {111};
+    common::PhoneNumber receiverNumber = phoneNumber;
     std::string messageText = "example";
     bool messageRead = false;
-
-    message testMessage{
-        messageId,
-        senderNumber,
-        receiverNumber,
-        messageText,
-        messageRead
-    };
 
     DbPortTestSuite()
     {}
@@ -42,18 +34,36 @@ protected:
 
 TEST_F(DbPortTestSuite, shallSaveOneMessage)
 {
-    common::PhoneNumber phoneNumber{123};
-    objectUnderTest.saveMessageToDb(phoneNumber, "a", false);
+    objectUnderTest.saveMessageToDb(phoneNumber, messageText, false);
 
     auto allMessages = objectUnderTest.getAllMessages();
-
     EXPECT_EQ(allMessages.size(), 1);
+    message testMessage {1, phoneNumber.value, 0, messageText, false};
+    ASSERT_TRUE(allMessages[0] == testMessage);
+}
+
+TEST_F(DbPortTestSuite, shallSaveOutgoingMessage)
+{
+    objectUnderTest.saveMessageToDb(senderNumber, messageText, true);
+
+    auto allMessages = objectUnderTest.getAllMessages();
+    EXPECT_EQ(allMessages.size(), 1);
+    message testMessage {1, receiverNumber.value, senderNumber.value, messageText, false};
+    ASSERT_TRUE(allMessages[0] == testMessage);
+}
+
+TEST_F(DbPortTestSuite, shallSaveIncomingMessage)
+{
+    objectUnderTest.saveMessageToDb(senderNumber, messageText, false);
+
+    auto allMessages = objectUnderTest.getAllMessages();
+    EXPECT_EQ(allMessages.size(), 1);
+    message testMessage {1, senderNumber.value, receiverNumber.value, messageText, false};
     ASSERT_TRUE(allMessages[0] == testMessage);
 }
 
 TEST_F(DbPortTestSuite, shallSaveMultipleMessages)
 {
-    common::PhoneNumber phoneNumber{123};
     int amountOfMessages = 10;
     for (int i = 0; i < amountOfMessages; ++i)
         objectUnderTest.saveMessageToDb(phoneNumber, "a", false);
@@ -65,7 +75,6 @@ TEST_F(DbPortTestSuite, shallSaveMultipleMessages)
 
 TEST_F(DbPortTestSuite, shallDeleteSingleMessage)
 {
-    common::PhoneNumber phoneNumber{123};
     int id = objectUnderTest.saveMessageToDb(phoneNumber, "a", false);
 
     objectUnderTest.removeMessageById(id);
@@ -77,7 +86,6 @@ TEST_F(DbPortTestSuite, shallDeleteSingleMessage)
 
 TEST_F(DbPortTestSuite, shallDeleteAllMessages)
 {
-    common::PhoneNumber phoneNumber{123};
     int amountOfMessages = 10;
     for (int i = 0; i < amountOfMessages; ++i)
         objectUnderTest.saveMessageToDb(phoneNumber, "a", false);

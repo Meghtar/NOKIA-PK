@@ -16,6 +16,8 @@ using namespace ::testing;
 class BtsPortTestSuite : public Test
 {
 protected:
+    common::PhoneNumber senderNumber {111};
+    common::PhoneNumber receiverNumber {110};
     const common::PhoneNumber PHONE_NUMBER{112};
     const common::BtsId BTS_ID{13121981ll};
     NiceMock<common::ILoggerMock> loggerMock;
@@ -45,6 +47,23 @@ protected:
 
 TEST_F(BtsPortTestSuite, shallRegisterHandlersBetweenStartStop)
 {
+}
+
+TEST_F(BtsPortTestSuite, shallSendSmsToBts)
+{
+    auto testMessage = "example";
+    common::BinaryMessage msg;
+
+    EXPECT_CALL(transportMock, sendMessage(_)).WillOnce(SaveArg<0>(&msg));
+
+    objectUnderTest.sendSms(receiverNumber, testMessage);
+
+    common::IncomingMessage sms(msg);
+    EXPECT_EQ(common::MessageId::Sms, sms.readMessageId());
+    EXPECT_EQ(PHONE_NUMBER, sms.readPhoneNumber());
+    EXPECT_EQ(receiverNumber, sms.readPhoneNumber());
+    EXPECT_EQ(testMessage, sms.readRemainingText());
+    ASSERT_NO_THROW(sms.checkEndOfMessage());
 }
 
 TEST_F(BtsPortTestSuite, shallHandleDisconnected)

@@ -14,7 +14,7 @@ void UserPort::start(IUserEventsHandler &handler)
 {
     this->handler = &handler;
     gui.setTitle("Nokia " + to_string(phoneNumber));
-    gui.setRejectCallback([&]() { showConnected();});
+    //gui.setRejectCallback([&]() { showConnected();});
 }
 
 void UserPort::stop()
@@ -39,6 +39,7 @@ void UserPort::showConnected()
     menu.clearSelectionList();
     menu.addSelectionListItem("Compose SMS", "");
     menu.addSelectionListItem("View SMS", "");
+    /*
     gui.setAcceptCallback([&]() {
 
         switch(menu.getCurrentItemIndex().second){
@@ -52,7 +53,7 @@ void UserPort::showConnected()
 
         }
     });
-
+    */
 
 }
 

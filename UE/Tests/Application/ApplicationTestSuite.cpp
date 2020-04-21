@@ -17,6 +17,7 @@ using namespace ::testing;
 class ApplicationTestSuite : public Test
 {
 protected:
+    common::PhoneNumber receiverNumber {111};
     const common::PhoneNumber PHONE_NUMBER{112};
     const common::BtsId BTS_ID{203};
     NiceMock<common::ILoggerMock> loggerMock;
@@ -55,6 +56,7 @@ struct ApplicationConnectingTestSuite : ApplicationNotConnectedTestSuite
     }
 };
 
+
 TEST_F(ApplicationConnectingTestSuite, shallSendAttachRequestUponReceivingSIB)
 {
     // implemented in Constructor of TestSuite
@@ -89,6 +91,14 @@ struct ApplicationConnectedTestSuite : ApplicationConnectingTestSuite
         objectUnderTest.handleAttachAccept();
     }
 };
+
+TEST_F(ApplicationConnectedTestSuite, shallHandleSendSms)
+{
+    auto msg = "example";
+    EXPECT_CALL(btsPortMock, sendSms(receiverNumber, msg));
+    EXPECT_CALL(dbPortMock, saveMessageToDb(receiverNumber, msg, true));
+    objectUnderTest.handleSendSms(receiverNumber, msg);
+}
 
 TEST_F(ApplicationConnectedTestSuite, shallShowConnectedOnAttachAccept)
 {

@@ -16,10 +16,8 @@ struct message
 
     bool operator==(const message& m) const {
         if(this->senderNumber == m.senderNumber &&
-           this->receiverNumber == m.receiverNumber &&
-           this->text == m.text &&
-           this->read == m.read)
-            return true;
+           this->text == m.text)
+                return true;
         return false;
     }
 
