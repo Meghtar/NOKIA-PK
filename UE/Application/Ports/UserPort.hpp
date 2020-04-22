@@ -10,6 +10,15 @@
 namespace ue
 {
 
+enum class View
+{
+    Default, // TODO: this name should be changed but i don't have better idea now
+    Home,
+    ComposeSms,
+    ListSms,
+    ReadSms
+};
+
 class UserPort : public IUserPort
 {
 public:
@@ -17,18 +26,26 @@ public:
     void start(IUserEventsHandler& handler);
     void stop();
 
+    void handleAcceptClick();
+
+    void handleRejectClick();
+
     void showNotConnected() override;
     void showConnecting() override;
     void showConnected() override;
 
-    void handleComposeSms();
-    void handleSmsListView();
+    void showComposeSms();
+    void showHome();
+    void showSmsList();
+    void showSms(unsigned id);
 
 private:
     common::PrefixedLogger logger;
     IUeGui& gui;
     common::PhoneNumber phoneNumber;
     IUserEventsHandler* handler = nullptr;
+    View currentView;
+    IUeGui::IListViewMode* currentList;
 };
 
 }
