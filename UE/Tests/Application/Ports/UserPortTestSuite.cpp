@@ -19,6 +19,7 @@ protected:
     StrictMock<IUserEventsHandlerMock> handlerMock;
     StrictMock<IUeGuiMock> guiMock;
     StrictMock<IListViewModeMock> listViewModeMock;
+    StrictMock<ISmsComposeModeMock> smsComposeModeMock;
 
     IUeGui::Callback acceptCallback;
     IUeGui::Callback rejectCallback;
@@ -64,4 +65,39 @@ TEST_F(UserPortTestSuite, shallShowMenuOnConnected)
     objectUnderTest.showConnected();
 }
 
+TEST_F(UserPortTestSuite, shallShowComposeSms)
+{
+    EXPECT_CALL(guiMock, setListViewMode()).WillOnce(ReturnRef(listViewModeMock));
+    EXPECT_CALL(listViewModeMock, clearSelectionList());
+    EXPECT_CALL(listViewModeMock, addSelectionListItem(_, _)).Times(AtLeast(1));
+    EXPECT_CALL(listViewModeMock, getCurrentItemIndex()).WillOnce(Return(std::pair<bool, unsigned>(true,0)));
+
+    EXPECT_CALL(guiMock, setSmsComposeMode()).WillOnce(ReturnRef(smsComposeModeMock));
+
+    objectUnderTest.showMenu();
+    acceptCallback();
+}
+
+TEST_F(UserPortTestSuite, shallShowMenuAfterRejectFromComposeSms)
+{
+    EXPECT_CALL(guiMock, setSmsComposeMode()).WillOnce(ReturnRef(smsComposeModeMock));
+
+    EXPECT_CALL(guiMock, setListViewMode()).WillOnce(ReturnRef(listViewModeMock));
+    EXPECT_CALL(listViewModeMock, clearSelectionList());
+    EXPECT_CALL(listViewModeMock, addSelectionListItem(_, _)).Times(AtLeast(1));
+
+    objectUnderTest.showComposeSms();
+    rejectCallback();
+}
+
+TEST_F(UserPortTestSuite, shallShowEmptySmsList)
+{
+    EXPECT_CALL(guiMock, setListViewMode()).WillOnce(ReturnRef(listViewModeMock));
+    EXPECT_CALL(listViewModeMock, clearSelectionList());
+    EXPECT_CALL(handlerMock, retrieveMessages());
+
+    // No messages are retrieved so addSelectionListItem will not be called
+
+    objectUnderTest.showSmsList();
+}
 }
