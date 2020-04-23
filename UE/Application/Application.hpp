@@ -31,6 +31,7 @@ public:
     void handleAttachAccept() override;
     void handleAttachReject() override;
     void handleSendSms(common::PhoneNumber, std::string) override;
+    void handleRecevieSms(common::PhoneNumber, std::string) override;
 
 private:
     Context context;

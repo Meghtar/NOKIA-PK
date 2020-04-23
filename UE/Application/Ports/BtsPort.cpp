@@ -88,4 +88,11 @@ void BtsPort::sendSms(common::PhoneNumber rNumber, std::string msg)
     transport.sendMessage(message.getMessage());
 }
 
+void BtsPort::recevieSms(common::PhoneNumber sNumber, std:: string msg)
+{
+    logger.logDebug("recevieSmsFrom=", sNumber);
+    common::IncomingMessage message { common::MessageId::Sms, phoneNumber, sNumber };
+    message.readText(msg);
+}
+
 }
