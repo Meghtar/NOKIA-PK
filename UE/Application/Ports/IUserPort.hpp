@@ -11,6 +11,7 @@ public:
     virtual ~IUserEventsHandler() = default;
     virtual void handleSendSms(common::PhoneNumber, std::string) = 0;
     virtual std::vector<message> retrieveMessages() = 0;
+    virtual void setMessageAsRead(int) = 0;
 };
 
 class IUserPort

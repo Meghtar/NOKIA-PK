@@ -50,4 +50,9 @@ std::vector<message> BaseState::retrieveMessages()
     logger.logError("Unexpected: retrieveMessages");
 }
 
+void BaseState::setMessageAsRead(int msgId)
+{
+    logger.logError("Unexpected: setMessageAsRead", msgId);
+}
+
 }

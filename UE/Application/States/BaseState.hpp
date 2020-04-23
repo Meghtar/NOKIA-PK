@@ -23,6 +23,7 @@ public:
     void handleAttachReject() override;
     void handleSendSms(common::PhoneNumber rNumber, std::string msg) override;
     std::vector<message> retrieveMessages() override;
+    void setMessageAsRead(int) override;
 
 protected:
     Context& context;

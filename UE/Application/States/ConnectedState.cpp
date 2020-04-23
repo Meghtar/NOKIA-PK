@@ -27,4 +27,9 @@ std::vector<message> ConnectedState::retrieveMessages()
     return context.db.getAllMessages();
 }
 
+void ConnectedState::setMessageAsRead(int msgId)
+{
+    context.db.markInDbAsRead(msgId);
+}
+
 }

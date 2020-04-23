@@ -32,6 +32,16 @@ protected:
     }
 };
 
+TEST_F(DbPortTestSuite, shallEditMessage)
+{
+    objectUnderTest.saveMessageToDb(phoneNumber, messageText, incoming);
+    auto allMessages = objectUnderTest.getAllMessages();
+    EXPECT_EQ(allMessages.size(), 1);
+    objectUnderTest.markInDbAsRead(allMessages[0].messageId);
+    allMessages = objectUnderTest.getAllMessages();
+    ASSERT_TRUE(allMessages[0].read == true);
+}
+
 TEST_F(DbPortTestSuite, shallSaveOneMessage)
 {
     objectUnderTest.saveMessageToDb(phoneNumber, messageText, outgoing);
