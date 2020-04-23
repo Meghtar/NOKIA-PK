@@ -52,4 +52,9 @@ void Application::handleSendSms(common::PhoneNumber rNumber, std::string message
     context.state->handleSendSms(rNumber, message);
 }
 
+std::vector<message> Application::retrieveMessages()
+{
+    return context.state->retrieveMessages();
+}
+
 }

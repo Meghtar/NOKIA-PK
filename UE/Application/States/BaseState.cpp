@@ -45,4 +45,9 @@ void BaseState::handleSendSms(common::PhoneNumber rNumber, std::string msg)
     logger.logError("Unexpected: handleSendSms number: ", rNumber, " content: ", msg);
 }
 
+std::vector<message> BaseState::retrieveMessages()
+{
+    logger.logError("Unexpected: retrieveMessages");
+}
+
 }
