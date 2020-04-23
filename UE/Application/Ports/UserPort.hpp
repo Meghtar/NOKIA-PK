@@ -13,7 +13,7 @@ namespace ue
 enum class View
 {
     Default, // TODO: this name should be changed but i don't have better idea now
-    Home,
+    Menu,
     ComposeSms,
     ListSms,
     ReadSms
@@ -41,7 +41,7 @@ public:
     void showConnected() override;
 
     void showComposeSms();
-    void showHome();
+    void showMenu();
     void showSmsList();
     void showSms(unsigned id);
 

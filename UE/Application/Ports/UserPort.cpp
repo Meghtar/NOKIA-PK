@@ -34,7 +34,7 @@ void UserPort::handleAcceptClick()
 {
     switch(currentView)
     {
-        case View::Home:
+        case View::Menu:
             {
                 auto option = static_cast<Option>((currentList->getCurrentItemIndex()).second);
                 if (option == Option::ComposeSms)
@@ -63,12 +63,12 @@ void UserPort::handleRejectClick()
     {
         case View::ComposeSms:
         {
-            showHome();
+            showMenu();
             break;
         }
         case View::ListSms:
         {
-            showHome();
+            showMenu();
             break;
         }
         case View::ReadSms:
@@ -95,8 +95,8 @@ void UserPort::showConnecting()
 
 void UserPort::showConnected()
 {
-    currentView = View::Home;
-    showHome();
+    currentView = View::Menu;
+    showMenu();
 }
 
 void UserPort::showComposeSms()
@@ -105,9 +105,9 @@ void UserPort::showComposeSms()
     IUeGui::ISmsComposeMode& smsView = gui.setSmsComposeMode();
 }
 
-void UserPort::showHome()
+void UserPort::showMenu()
 {
-    currentView = View::Home;
+    currentView = View::Menu;
     IUeGui::IListViewMode& menu = gui.setListViewMode();
     menu.clearSelectionList();
     menu.addSelectionListItem("Compose SMS", "");

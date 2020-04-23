@@ -74,7 +74,7 @@ TEST_F(UserPortTestSuite, shallShowComposeSms)
 
     EXPECT_CALL(guiMock, setSmsComposeMode()).WillOnce(ReturnRef(smsComposeModeMock));
 
-    objectUnderTest.showHome();
+    objectUnderTest.showMenu();
     acceptCallback();
 }
 
