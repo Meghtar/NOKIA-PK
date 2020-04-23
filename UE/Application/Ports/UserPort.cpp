@@ -64,6 +64,7 @@ void UserPort::handleAcceptClick()
 
 void UserPort::handleRejectClick()
 {
+
     showHome();
 }
 

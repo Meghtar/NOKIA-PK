@@ -10,6 +10,8 @@ ConnectedState::ConnectedState(Context &context)
     context.timer.stopTimer();
     //context.db.removeAllMessages(); // AS BELOW
     //context.db.saveMessageToDb(common::PhoneNumber{100}, "XYZ", outgoing); // JUST FOR TESTING PURPOSES
+    //context.db.saveMessageToDb(common::PhoneNumber{112}, "trefsf", outgoing); // JUST FOR TESTING PURPOSES
+
 }
 
 void ConnectedState::handleDisconnected()

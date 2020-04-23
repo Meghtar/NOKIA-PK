@@ -27,7 +27,6 @@ public:
     void stop();
 
     void handleAcceptClick();
-
     void handleRejectClick();
 
     void showNotConnected() override;
