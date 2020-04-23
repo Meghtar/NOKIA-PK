@@ -57,4 +57,9 @@ std::vector<message> Application::retrieveMessages()
     return context.state->retrieveMessages();
 }
 
+void Application::setMessageAsRead(int msgId)
+{
+    context.state->setMessageAsRead(msgId);
+}
+
 }

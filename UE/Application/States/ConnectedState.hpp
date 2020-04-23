@@ -12,6 +12,7 @@ public:
     void handleDisconnected() override;
     void handleSendSms(common::PhoneNumber, std::string msg) override;
     std::vector<message> retrieveMessages() override;
+    void setMessageAsRead(int) override;
 };
 
 }

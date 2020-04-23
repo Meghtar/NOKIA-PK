@@ -64,7 +64,6 @@ void UserPort::handleAcceptClick()
 
 void UserPort::handleRejectClick()
 {
-
     showHome();
 }
 
@@ -130,7 +129,7 @@ void UserPort::showSms(unsigned id) {
     IUeGui::ITextMode& readSms = gui.setViewTextMode();
     auto listOfMessages = handler->retrieveMessages();
     std::string text = listOfMessages[id].text;
-    //handler->setMessageAsRead(); TODO: will need database update method
+    handler->setMessageAsRead(listOfMessages[id].messageId);
     readSms.setText(text);
 }
 
