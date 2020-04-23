@@ -8,10 +8,6 @@ ConnectedState::ConnectedState(Context &context)
 {
     context.user.showConnected();
     context.timer.stopTimer();
-    //context.db.removeAllMessages(); // AS BELOW
-    //context.db.saveMessageToDb(common::PhoneNumber{100}, "XYZ", outgoing); // JUST FOR TESTING PURPOSES
-    //context.db.saveMessageToDb(common::PhoneNumber{112}, "trefsf", outgoing); // JUST FOR TESTING PURPOSES
-
 }
 
 void ConnectedState::handleDisconnected()
@@ -33,7 +29,7 @@ std::vector<message> ConnectedState::retrieveMessages()
 
 void ConnectedState::setMessageAsRead(int msgId)
 {
-    context.db.markInDbAsReaded(msgId);
+    context.db.markInDbAsRead(msgId);
 }
 
 }

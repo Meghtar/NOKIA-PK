@@ -18,7 +18,7 @@ public:
     MOCK_METHOD(message, getMessageById, (int), (final));
     MOCK_METHOD(void, removeMessageById, (int), (final));
     MOCK_METHOD(void, removeAllMessages, (), (final));
-    MOCK_METHOD(void, markInDbAsReaded, (int), (final));
+    MOCK_METHOD(void, markInDbAsRead, (int), (final));
 };
 
 }

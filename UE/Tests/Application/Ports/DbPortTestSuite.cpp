@@ -37,7 +37,7 @@ TEST_F(DbPortTestSuite, shallEditMessage)
     objectUnderTest.saveMessageToDb(phoneNumber, messageText, incoming);
     auto allMessages = objectUnderTest.getAllMessages();
     EXPECT_EQ(allMessages.size(), 1);
-    objectUnderTest.markInDbAsReaded(allMessages[0].messageId);
+    objectUnderTest.markInDbAsRead(allMessages[0].messageId);
     allMessages = objectUnderTest.getAllMessages();
     ASSERT_TRUE(allMessages[0].read == true);
 }

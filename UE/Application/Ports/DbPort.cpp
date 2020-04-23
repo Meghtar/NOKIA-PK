@@ -12,7 +12,7 @@ DbPort::DbPort(int number) : _number(number)
 
 int DbPort::saveMessageToDb(const common::PhoneNumber phoneNumber, std::string text, isSender val)
 {
-    bool isReaded = true;
+    bool isRead = true;
     int receiverNumber, senderNumber;
     if(val == isSender::outgoing)
     {
@@ -21,9 +21,9 @@ int DbPort::saveMessageToDb(const common::PhoneNumber phoneNumber, std::string t
     } else {
         receiverNumber = _number;
         senderNumber = phoneNumber.value;
-        isReaded = false;
+        isRead = false;
     }
-    message msg {/*Autoincrement */ -1, senderNumber, receiverNumber, text, isReaded};
+    message msg {/*Autoincrement */ -1, senderNumber, receiverNumber, text, isRead};
     return _db->insert(msg);
 }
 
@@ -47,7 +47,7 @@ void DbPort::removeAllMessages()
     _db->remove_all<message>();
 }
 
-void DbPort::markInDbAsReaded(int messId)
+void DbPort::markInDbAsRead(int messId)
 {
     auto sms = getMessageById(messId);
     sms.read = true;

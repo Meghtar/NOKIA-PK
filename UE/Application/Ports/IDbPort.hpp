@@ -36,7 +36,7 @@ public:
     virtual message getMessageById(int message_id) = 0;
     virtual void removeMessageById(int message_id) = 0;
     virtual void removeAllMessages() = 0;
-    virtual void markInDbAsReaded(int)=0;
+    virtual void markInDbAsRead(int)=0;
 };
 
 }
