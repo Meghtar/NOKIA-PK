@@ -19,6 +19,12 @@ enum class View
     ReadSms
 };
 
+enum class Option
+{
+    ComposeSms,
+    ShowSms
+};
+
 class UserPort : public IUserPort
 {
 public:

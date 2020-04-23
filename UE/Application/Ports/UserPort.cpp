@@ -36,12 +36,12 @@ void UserPort::handleAcceptClick()
     {
         case View::Home:
             {
-                auto option = (currentList->getCurrentItemIndex()).second;
-                if (option == /*compose*/0) // TODO: into enum
+                auto option = static_cast<Option>((currentList->getCurrentItemIndex()).second);
+                if (option == Option::ComposeSms)
                 {
                     showComposeSms();
                 }
-                else if (option == /*show sms*/1)
+                else if (option == Option::ShowSms)
                 {
                     showSmsList();
                 }
@@ -54,18 +54,32 @@ void UserPort::handleAcceptClick()
                 showSms(currentSmsId);
                 break;
             }
-        /*case View::ListSms:
-            // get current sms
-            auto currentSmsId = (currentList->getCurrentItemIndex()).second;
-            //showSms(currentSmsId);
-        break;*/
     }
 }
 
 void UserPort::handleRejectClick()
 {
-    showHome();
+    switch(currentView)
+    {
+        case View::ComposeSms:
+        {
+            showHome();
+            break;
+        }
+        case View::ListSms:
+        {
+            showHome();
+            break;
+        }
+        case View::ReadSms:
+        {
+            showSmsList();
+            break;
+        }
+    }
 }
+
+// void UserPort::handleHomeClick() {} TODO
 
 void UserPort::showNotConnected()
 {
@@ -89,7 +103,6 @@ void UserPort::showComposeSms()
 {
     currentView = View::ComposeSms;
     IUeGui::ISmsComposeMode& smsView = gui.setSmsComposeMode();
-    //handler->handleSendSms();
 }
 
 void UserPort::showHome()
@@ -100,14 +113,13 @@ void UserPort::showHome()
     menu.addSelectionListItem("Compose SMS", "");
     menu.addSelectionListItem("View SMS", "");
     currentList = &menu;
-    //menu.
 }
 
 void UserPort::showSmsList() {
     currentView = View::ListSms;
     IUeGui::IListViewMode& smsList = gui.setListViewMode();
-    auto listOfMessages = handler->retrieveMessages();
     smsList.clearSelectionList();
+    auto listOfMessages = handler->retrieveMessages();
     for (const auto& msg : listOfMessages)
     {
         std::string preview;
