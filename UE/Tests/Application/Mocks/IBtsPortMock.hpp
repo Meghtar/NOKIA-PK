@@ -27,6 +27,7 @@ public:
 
     MOCK_METHOD(void, sendAttachRequest, (common::BtsId), (final));
     MOCK_METHOD(void, sendSms, (common::PhoneNumber, std::string), (final));
+    MOCK_METHOD(void, recevieSms, (common::PhoneNumber, std::string), (final));
 };
 
 }

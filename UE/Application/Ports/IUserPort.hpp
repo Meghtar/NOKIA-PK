@@ -9,6 +9,7 @@ class IUserEventsHandler
 public:
     virtual ~IUserEventsHandler() = default;
     virtual void handleSendSms(common::PhoneNumber, std::string) = 0;
+    virtual void handleRecevieSms(common::PhoneNumber, std::string) = 0;
 };
 
 class IUserPort

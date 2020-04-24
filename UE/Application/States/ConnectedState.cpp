@@ -22,4 +22,10 @@ void ConnectedState::handleSendSms(common::PhoneNumber rNumber, std::string msg)
     context.db.saveMessageToDb(rNumber, msg, outgoing);
 }
 
+void ConnectedState::handleRecevieSms(common::PhoneNumber sNumber, std::string msg)
+{
+    context.db.saveMessageToDb(sNumber, msg, 0);
+    context.bts.recevieSms(sNumber, msg);
+}
+
 }
