@@ -52,9 +52,20 @@ void Application::handleSendSms(common::PhoneNumber rNumber, std::string message
     context.state->handleSendSms(rNumber, message);
 }
 
-void Application::handleRecevieSms(common::PhoneNumber sNumber, std::string message)
+
+void Application::handleReceiveSms(common::PhoneNumber sNumber, std::string message)
 {
-    context.state->handleRecevieSms(message);
+    context.state->handleReceiveSms(sNumber, message);
+}
+
+std::vector<message> Application::retrieveMessages()
+{
+    return context.state->retrieveMessages();
+}
+
+void Application::setMessageAsRead(int msgId)
+{
+    context.state->setMessageAsRead(msgId);
 }
 
 }

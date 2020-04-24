@@ -22,10 +22,19 @@ void ConnectedState::handleSendSms(common::PhoneNumber rNumber, std::string msg)
     context.db.saveMessageToDb(rNumber, msg, outgoing);
 }
 
-void ConnectedState::handleRecevieSms(common::PhoneNumber sNumber, std::string msg)
+void ConnectedState::handleReceiveSms(common::PhoneNumber sNumber, std::string msg)
 {
-    context.db.saveMessageToDb(sNumber, msg, 0);
-    context.bts.recevieSms(sNumber, msg);
+    context.db.saveMessageToDb(sNumber, msg, incoming);
+}
+
+std::vector<message> ConnectedState::retrieveMessages()
+{
+    return context.db.getAllMessages();
+}
+
+void ConnectedState::setMessageAsRead(int msgId)
+{
+    context.db.markInDbAsRead(msgId);
 }
 
 }

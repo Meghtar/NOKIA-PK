@@ -28,6 +28,7 @@ public:
     message getMessageById(int message_id) override;
     void removeMessageById(int message_id) override;
     void removeAllMessages() override;
+    void markInDbAsRead(int) override;
 private:
     std::string _dbPath;
     const int _number;

@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 #include "Messages/PhoneNumber.hpp"
-#include "IDbPort.hpp"
+
 namespace ue
 {
 
@@ -36,6 +36,7 @@ public:
     virtual message getMessageById(int message_id) = 0;
     virtual void removeMessageById(int message_id) = 0;
     virtual void removeAllMessages() = 0;
+    virtual void markInDbAsRead(int)=0;
 };
 
 }

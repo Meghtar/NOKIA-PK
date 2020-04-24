@@ -11,6 +11,9 @@ public:
     ConnectedState(Context& context);
     void handleDisconnected() override;
     void handleSendSms(common::PhoneNumber, std::string msg) override;
+    void handleReceiveSms(common::PhoneNumber, std::string msg) override;
+    std::vector<message> retrieveMessages() override;
+    void setMessageAsRead(int) override;
 };
 
 }
