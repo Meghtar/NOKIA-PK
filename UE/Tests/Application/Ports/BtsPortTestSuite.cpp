@@ -66,6 +66,13 @@ TEST_F(BtsPortTestSuite, shallSendSmsToBts)
     ASSERT_NO_THROW(sms.checkEndOfMessage());
 }
 
+TEST_F(BtsPortTestSuite, shallHandleReceivedSms)
+{
+    EXPECT_CALL(handlerMock, handleReceiveSms);
+    common::OutgoingMessage msg{common::MessageId::Sms, common::PhoneNumber{}, PHONE_NUMBER};
+    messageCallback(msg.getMessage());
+}
+
 TEST_F(BtsPortTestSuite, shallHandleDisconnected)
 {
     EXPECT_CALL(handlerMock, handleDisconnected());
