@@ -102,11 +102,10 @@ TEST_F(ApplicationConnectedTestSuite, shallHandleSendSms)
 
 TEST_F(ApplicationConnectedTestSuite, shallHandleReceiveSms)
 {
-    auto sNumber = common::PhoneNumber{124};
     auto message = "hello world";;
-    EXPECT_CALL(dbPortMock, saveMessageToDb(sNumber, message, incoming));
+    EXPECT_CALL(dbPortMock, saveMessageToDb(receiverNumber, message, incoming));
 
-     objectUnderTest.handleReceiveSms(sNumber, message);
+     objectUnderTest.handleReceiveSms(receiverNumber, message);
 }
 
 TEST_F(ApplicationConnectedTestSuite, shallShowConnectedOnAttachAccept)

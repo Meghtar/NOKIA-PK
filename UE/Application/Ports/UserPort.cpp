@@ -54,6 +54,16 @@ void UserPort::handleAcceptClick()
                 showSms(currentSmsId);
                 break;
             }
+        case View::ComposeSms:
+            {
+                IUeGui::ISmsComposeMode& smsView = gui.setSmsComposeMode();
+                auto number = smsView.getPhoneNumber();
+                auto msg = smsView.getSmsText();
+                handler->handleSendSms(number, msg);
+                smsView.clearSmsText();
+                showMenu();
+                break;
+            }
     }
 }
 

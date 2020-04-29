@@ -72,6 +72,24 @@ TEST_F(DbPortTestSuite, shallSaveIncomingMessage)
     ASSERT_TRUE(allMessages[0] == testMessage);
 }
 
+TEST_F(DbPortTestSuite, shallHandleIncomingMessage)
+{
+    objectUnderTest.saveMessageToDb(senderNumber, messageText, incoming);
+
+    auto allMessages = objectUnderTest.getAllMessages();
+    EXPECT_EQ(allMessages.size(), 1);
+    ASSERT_TRUE(allMessages[0].receiverNumber == receiverNumber.value);
+}
+
+TEST_F(DbPortTestSuite, shallHandleReceivingMessage)
+{
+    objectUnderTest.saveMessageToDb(senderNumber, messageText, outgoing);
+
+    auto allMessages = objectUnderTest.getAllMessages();
+    EXPECT_EQ(allMessages.size(), 1);
+    ASSERT_TRUE(allMessages[0].receiverNumber == senderNumber.value);
+}
+
 TEST_F(DbPortTestSuite, shallSaveMultipleMessages)
 {
     int amountOfMessages = 10;
