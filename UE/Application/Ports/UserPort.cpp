@@ -118,6 +118,8 @@ void UserPort::showComposeSms()
 {
     currentView = View::ComposeSms;
     IUeGui::ISmsComposeMode& smsView = gui.setSmsComposeMode();
+    smsView.clearSmsText();
+    // TODO: this probably shouldn't be final solution, draft should be kept somewhere
 }
 
 void UserPort::showMenu()
