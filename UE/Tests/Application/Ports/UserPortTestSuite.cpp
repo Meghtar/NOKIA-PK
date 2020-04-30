@@ -73,6 +73,7 @@ TEST_F(UserPortTestSuite, shallShowComposeSms)
     EXPECT_CALL(listViewModeMock, getCurrentItemIndex()).WillOnce(Return(std::pair<bool, unsigned>(true,0)));
 
     EXPECT_CALL(guiMock, setSmsComposeMode()).WillOnce(ReturnRef(smsComposeModeMock));
+    EXPECT_CALL(smsComposeModeMock, clearSmsText());
 
     objectUnderTest.showMenu();
     acceptCallback();
@@ -81,6 +82,7 @@ TEST_F(UserPortTestSuite, shallShowComposeSms)
 TEST_F(UserPortTestSuite, shallShowMenuAfterRejectFromComposeSms)
 {
     EXPECT_CALL(guiMock, setSmsComposeMode()).WillOnce(ReturnRef(smsComposeModeMock));
+    EXPECT_CALL(smsComposeModeMock, clearSmsText());
 
     EXPECT_CALL(guiMock, setListViewMode()).WillOnce(ReturnRef(listViewModeMock));
     EXPECT_CALL(listViewModeMock, clearSelectionList());
