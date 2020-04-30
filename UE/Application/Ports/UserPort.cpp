@@ -45,6 +45,11 @@ void UserPort::handleAcceptClick()
                 {
                     showSmsList();
                 }
+                else if (option == Option::DeleteAllSms)
+                {
+                    // mostly a debug feature
+                    handler->deleteAllMessages();
+                }
                 break;
             }
         case View::ListSms:
@@ -122,6 +127,7 @@ void UserPort::showMenu()
     menu.clearSelectionList();
     menu.addSelectionListItem("Compose SMS", "");
     menu.addSelectionListItem("View SMS", "");
+    menu.addSelectionListItem("Delete all SMS", "Not implemented yet");
     currentList = &menu;
 }
 

@@ -25,6 +25,7 @@ public:
     void handleReceiveSms(common::PhoneNumber sNumber, std::string msg) override;
     std::vector<message> retrieveMessages() override;
     void setMessageAsRead(int) override;
+    void deleteAllMessages() override;
 
 protected:
     Context& context;

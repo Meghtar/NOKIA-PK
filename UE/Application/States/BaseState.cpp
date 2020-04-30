@@ -60,4 +60,9 @@ void BaseState::setMessageAsRead(int msgId)
     logger.logError("Unexpected: setMessageAsRead", msgId);
 }
 
+void BaseState::deleteAllMessages()
+{
+    logger.logError("Unexpected: deleteAllMessages");
+}
+
 }

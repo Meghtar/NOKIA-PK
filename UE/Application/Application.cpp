@@ -68,4 +68,9 @@ void Application::setMessageAsRead(int msgId)
     context.state->setMessageAsRead(msgId);
 }
 
+void Application::deleteAllMessages()
+{
+    context.state->deleteAllMessages();
+}
+
 }

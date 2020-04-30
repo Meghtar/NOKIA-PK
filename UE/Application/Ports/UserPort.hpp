@@ -22,7 +22,8 @@ enum class View
 enum class Option
 {
     ComposeSms,
-    ShowSms
+    ShowSms,
+    DeleteAllSms
 };
 
 class UserPort : public IUserPort

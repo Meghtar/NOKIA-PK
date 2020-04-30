@@ -37,4 +37,9 @@ void ConnectedState::setMessageAsRead(int msgId)
     context.db.markInDbAsRead(msgId);
 }
 
+void ConnectedState::deleteAllMessages()
+{
+    context.db.removeAllMessages();
+}
+
 }
