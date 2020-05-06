@@ -39,6 +39,8 @@ public:
     void showNotConnected() override;
     void showConnecting() override;
     void showConnected() override;
+    void showNewSms() override;
+    void showNoNewSms() override;
 
     void showComposeSms();
     void showMenu();

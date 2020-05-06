@@ -25,6 +25,8 @@ void ConnectedState::handleSendSms(common::PhoneNumber rNumber, std::string msg)
 void ConnectedState::handleReceiveSms(common::PhoneNumber sNumber, std::string msg)
 {
     context.db.saveMessageToDb(sNumber, msg, incoming);
+    context.user.showConnected();
+    context.user.showNewSms();
 }
 
 std::vector<message> ConnectedState::retrieveMessages()

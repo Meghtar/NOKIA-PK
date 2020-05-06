@@ -114,6 +114,16 @@ void UserPort::showConnected()
     showMenu();
 }
 
+void UserPort::showNewSms()
+{
+    gui.showNewSms();
+}
+
+void UserPort::showNoNewSms()
+{
+    gui.showNoNewSms();
+}
+
 void UserPort::showComposeSms()
 {
     currentView = View::ComposeSms;
@@ -150,6 +160,7 @@ void UserPort::showSmsList() {
         smsList.addSelectionListItem(preview, "");
     }
     currentList = &smsList;
+    showNoNewSms();
 }
 
 void UserPort::showSms(unsigned id) {
