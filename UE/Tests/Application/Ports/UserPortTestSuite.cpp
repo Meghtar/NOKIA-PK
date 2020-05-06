@@ -97,6 +97,7 @@ TEST_F(UserPortTestSuite, shallShowEmptySmsList)
     EXPECT_CALL(guiMock, setListViewMode()).WillOnce(ReturnRef(listViewModeMock));
     EXPECT_CALL(listViewModeMock, clearSelectionList());
     EXPECT_CALL(handlerMock, retrieveMessages());
+    EXPECT_CALL(guiMock, showNoNewSms());
 
     // No messages are retrieved so addSelectionListItem will not be called
 

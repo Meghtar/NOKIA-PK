@@ -104,6 +104,7 @@ TEST_F(ApplicationConnectedTestSuite, shallHandleReceiveSms)
 {
     auto message = "hello world";;
     EXPECT_CALL(dbPortMock, saveMessageToDb(receiverNumber, message, incoming));
+    EXPECT_CALL(userPortMock, showNewSms());
 
      objectUnderTest.handleReceiveSms(receiverNumber, message);
 }
