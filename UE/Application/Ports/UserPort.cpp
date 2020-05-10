@@ -45,6 +45,11 @@ void UserPort::handleAcceptClick()
                 {
                     showSmsList();
                 }
+                else if (option == Option::DeleteAllSms)
+                {
+                    // mostly a debug feature
+                    handler->deleteAllMessages();
+                }
                 break;
             }
         case View::ListSms:
@@ -109,10 +114,21 @@ void UserPort::showConnected()
     showMenu();
 }
 
+void UserPort::showNewSms()
+{
+    gui.showNewSms();
+}
+
+void UserPort::showNoNewSms()
+{
+    gui.showNoNewSms();
+}
+
 void UserPort::showComposeSms()
 {
     currentView = View::ComposeSms;
     IUeGui::ISmsComposeMode& smsView = gui.setSmsComposeMode();
+    smsView.clearSmsText();
 }
 
 void UserPort::showMenu()
@@ -122,6 +138,7 @@ void UserPort::showMenu()
     menu.clearSelectionList();
     menu.addSelectionListItem("Compose SMS", "");
     menu.addSelectionListItem("View SMS", "");
+    menu.addSelectionListItem("Delete all SMS", "");
     currentList = &menu;
 }
 
@@ -142,6 +159,7 @@ void UserPort::showSmsList() {
         smsList.addSelectionListItem(preview, "");
     }
     currentList = &smsList;
+    showNoNewSms();
 }
 
 void UserPort::showSms(unsigned id) {

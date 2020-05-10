@@ -20,6 +20,7 @@ void QtSmsComposeMode::connectSignals()
 {
     connect(this,SIGNAL(setSmsTextSignal(QString)),this,SLOT(setSmsTextSlot(QString)));
     connect(this,SIGNAL(clearSmsTextSignal()),this,SLOT(clearSmsTextSlot()));
+    connect(this,SIGNAL(clearSmsPhoneNumberSignal()),this,SLOT(clearSmsPhoneNumberSlot()));
     connect(this,SIGNAL(activateForViewingSmsSignal()),this,SLOT(activateForViewingSmsSlot()));
 }
 
@@ -60,9 +61,19 @@ void QtSmsComposeMode::clearSmsText()
     emit clearSmsTextSignal();
 }
 
+void QtSmsComposeMode::clearSmsPhoneNumber()
+{
+    emit clearSmsPhoneNumberSignal();
+}
+
 void QtSmsComposeMode::clearSmsTextSlot()
 {
     smsTextEdit.clear();
+}
+
+void QtSmsComposeMode::clearSmsPhoneNumberSlot()
+{
+    QtUeModeWidget::clearPhoneNumber();
 }
 
 void QtSmsComposeMode::activateForViewingSms()

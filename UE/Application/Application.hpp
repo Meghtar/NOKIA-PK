@@ -34,6 +34,7 @@ public:
     void handleReceiveSms(common::PhoneNumber, std::string) override;
     std::vector<message> retrieveMessages() override;
     void setMessageAsRead(int) override;
+    void deleteAllMessages() override;
 
 private:
     Context context;

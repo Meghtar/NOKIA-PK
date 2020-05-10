@@ -12,6 +12,7 @@ public:
     virtual void handleSendSms(common::PhoneNumber, std::string) = 0;
     virtual std::vector<message> retrieveMessages() = 0;
     virtual void setMessageAsRead(int) = 0;
+    virtual void deleteAllMessages() = 0;
 };
 
 class IUserPort
@@ -22,6 +23,8 @@ public:
     virtual void showNotConnected() = 0;
     virtual void showConnecting() = 0;
     virtual void showConnected() = 0;
+    virtual void showNewSms() = 0;
+    virtual void showNoNewSms() = 0;
 };
 
 }

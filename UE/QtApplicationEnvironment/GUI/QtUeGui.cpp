@@ -230,6 +230,11 @@ void QtUeGui::showNewSms()
     emit setNewMessageSignal(true);
 }
 
+void QtUeGui::showNoNewSms()
+{
+    emit setNewMessageSignal(false);
+}
+
 void QtUeGui::showPeerUserNotAvailable(PhoneNumber peer)
 {
     setAlertMode().setText("Not available: " + to_string(peer));

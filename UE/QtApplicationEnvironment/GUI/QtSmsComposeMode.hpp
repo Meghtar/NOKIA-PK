@@ -19,6 +19,7 @@ public:
     PhoneNumber getPhoneNumber() const override;
     std::string getSmsText() const override;
     void clearSmsText() override;
+    void clearSmsPhoneNumber() override;
 
     void activateForViewingSms();
     void setSmsText(const std::string&);
@@ -34,12 +35,14 @@ signals:
     void activateForViewingSmsSignal();
     void setSmsTextSignal(QString);
     void clearSmsTextSignal();
+    void clearSmsPhoneNumberSignal();
 
 private slots:
     void activateSlot() override;
     void activateForViewingSmsSlot();
     void setSmsTextSlot(QString);
     void clearSmsTextSlot();
+    void clearSmsPhoneNumberSlot();
 };
 
 }

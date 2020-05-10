@@ -27,6 +27,7 @@ protected:
     void activateWithPhoneNumberEditDisabled();
 
     PhoneNumber getPhoneNumber() const;
+    void clearPhoneNumber();
 
 private:
     void activateThisWidget();

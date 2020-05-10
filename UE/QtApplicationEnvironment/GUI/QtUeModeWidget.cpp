@@ -24,6 +24,7 @@ void QtUeModeWidget::activateWithPhoneNumberEditEnabled()
 
 void QtUeModeWidget::activateWithPhoneNumberEditDisabled()
 {
+    clearPhoneNumber();
     phoneNumberEdit.disable();
     activateThisWidget();
 }
@@ -31,6 +32,11 @@ void QtUeModeWidget::activateWithPhoneNumberEditDisabled()
 PhoneNumber QtUeModeWidget::getPhoneNumber() const
 {
     return phoneNumberEdit.getPhoneNumber();
+}
+
+void QtUeModeWidget::clearPhoneNumber()
+{
+    phoneNumberEdit.setText("");
 }
 
 void QtUeModeWidget::activateThisWidget()
