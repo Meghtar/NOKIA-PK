@@ -24,7 +24,7 @@ void QtUeModeWidget::activateWithPhoneNumberEditEnabled()
 
 void QtUeModeWidget::activateWithPhoneNumberEditDisabled()
 {
-    clearPhoneNumber(); // TODO: i'm not sure if we should clear phone Number
+    clearPhoneNumber();
     phoneNumberEdit.disable();
     activateThisWidget();
 }

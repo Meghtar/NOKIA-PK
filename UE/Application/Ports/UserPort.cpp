@@ -129,7 +129,6 @@ void UserPort::showComposeSms()
     currentView = View::ComposeSms;
     IUeGui::ISmsComposeMode& smsView = gui.setSmsComposeMode();
     smsView.clearSmsText();
-    // TODO: this probably shouldn't be final solution, draft should be kept somewhere
 }
 
 void UserPort::showMenu()
@@ -139,7 +138,7 @@ void UserPort::showMenu()
     menu.clearSelectionList();
     menu.addSelectionListItem("Compose SMS", "");
     menu.addSelectionListItem("View SMS", "");
-    menu.addSelectionListItem("Delete all SMS", "Not implemented yet");
+    menu.addSelectionListItem("Delete all SMS", "");
     currentList = &menu;
 }
 
