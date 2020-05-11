@@ -73,4 +73,13 @@ void Application::deleteAllMessages()
     context.state->deleteAllMessages();
 }
 
+void Application::handleCallRequest(common::PhoneNumber number)
+{
+    context.state->handleCallRequest(number);
+}
+
+void Application::callResponse(common::PhoneNumber number, bool acc)
+{
+    context.state->callResponse(number, acc);
+}
 }

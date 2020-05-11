@@ -16,14 +16,17 @@ enum class View
     Menu,
     ComposeSms,
     ListSms,
-    ReadSms
+    ReadSms,
+    CallView,
+    IncomingCallView
 };
 
 enum class Option
 {
     ComposeSms,
     ShowSms,
-    DeleteAllSms
+    DeleteAllSms,
+    Call
 };
 
 class UserPort : public IUserPort
@@ -41,6 +44,8 @@ public:
     void showConnected() override;
     void showNewSms() override;
     void showNoNewSms() override;
+    void showCallView() override;
+    void showIncomingCallRequest(common::PhoneNumber) override;
 
     void showComposeSms();
     void showMenu();

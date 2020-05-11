@@ -65,4 +65,14 @@ void BaseState::deleteAllMessages()
     logger.logError("Unexpected: deleteAllMessages");
 }
 
+void BaseState::handleCallRequest(common::PhoneNumber number)
+{
+    logger.logError("Unexpected: handleCallRequest ", number);
+}
+
+void BaseState::callResponse(common::PhoneNumber number, bool a)
+{
+    logger.logError("Unexpected: callResponse ", number, " ", a);
+}
+
 }

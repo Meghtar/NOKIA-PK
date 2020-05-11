@@ -50,6 +50,10 @@ void UserPort::handleAcceptClick()
                     // mostly a debug feature
                     handler->deleteAllMessages();
                 }
+                else if (option == Option::Call)
+                {
+                    showCallView();
+                }
                 break;
             }
         case View::ListSms:
@@ -67,6 +71,11 @@ void UserPort::handleAcceptClick()
                 handler->handleSendSms(number, msg);
                 smsView.clearSmsText();
                 showMenu();
+                break;
+            }
+        case View::CallView:
+            {
+                IUeGui::ICallMode& callView = gui.setCallMode();
                 break;
             }
     }
@@ -89,6 +98,11 @@ void UserPort::handleRejectClick()
         case View::ReadSms:
         {
             showSmsList();
+            break;
+        }
+        case View::CallView:
+        {
+            showCallView();
             break;
         }
     }
@@ -139,6 +153,7 @@ void UserPort::showMenu()
     menu.addSelectionListItem("Compose SMS", "");
     menu.addSelectionListItem("View SMS", "");
     menu.addSelectionListItem("Delete all SMS", "");
+    menu.addSelectionListItem("Call", "");
     currentList = &menu;
 }
 
@@ -171,6 +186,20 @@ void UserPort::showSms(unsigned id) {
     std::string text = listOfMessages[id].text;
     handler->setMessageAsRead(listOfMessages[id].messageId);
     readSms.setText(text);
+}
+
+void UserPort::showIncomingCallRequest(common::PhoneNumber number)
+{
+    currentView = View::IncomingCallView;
+    IUeGui::ITextMode& incomingCallView = gui.setAlertMode();
+    gui.setAcceptCallback([&] { handler->callResponse(phoneNumber, true);});
+    gui.setAcceptCallback([&] { handler->callResponse(phoneNumber, false);});
+}
+
+void UserPort::showCallView()
+{
+    currentView = View::CallView;
+    IUeGui::ICallMode& callView = gui.setCallMode();
 }
 
 }

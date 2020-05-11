@@ -25,6 +25,7 @@ public:
     // ITimerEventsHandler interface
     void handleTimeout() override;
 
+
     // IBtsEventsHandler interface
     void handleDisconnected() override;
     void handleSib(common::BtsId btsId) override;
@@ -35,6 +36,8 @@ public:
     std::vector<message> retrieveMessages() override;
     void setMessageAsRead(int) override;
     void deleteAllMessages() override;
+    void handleCallRequest(common::PhoneNumber) override;
+    void callResponse(common::PhoneNumber, bool) override;
 
 private:
     Context context;

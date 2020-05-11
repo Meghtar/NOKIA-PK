@@ -69,6 +69,7 @@ TEST_F(BtsPortTestSuite, shallSendSmsToBts)
 TEST_F(BtsPortTestSuite, shallHandleReceivedSms)
 {
     EXPECT_CALL(handlerMock, handleReceiveSms);
+    EXPECT_CALL(handlerMock, handleCallRequest);
     common::OutgoingMessage msg{common::MessageId::Sms, common::PhoneNumber{}, PHONE_NUMBER};
     messageCallback(msg.getMessage());
 }
