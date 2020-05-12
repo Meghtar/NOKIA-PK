@@ -82,7 +82,7 @@ TEST_F(BtsPortTestSuite, shallRejectCall)
     ASSERT_NO_THROW(readmsg.checkEndOfMessage());
 }
 
-TEST_F(BtsPortTestSuite, shallSendRejectCallResponse)
+TEST_F(BtsPortTestSuite, shallRejectCallResponse)
 {
     common::BinaryMessage msg;
     EXPECT_CALL(transportMock, sendMessage(_)).WillOnce(SaveArg<0>(&msg));

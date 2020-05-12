@@ -193,7 +193,7 @@ void UserPort::showIncomingCallRequest(common::PhoneNumber number)
     currentView = View::IncomingCallView;
     IUeGui::ITextMode& incomingCallView = gui.setAlertMode();
     gui.setAcceptCallback([&] { handler->callResponse(phoneNumber, Call::accepted);});
-    gui.setAcceptCallback([&] { handler->callResponse(phoneNumber, Call::rejected);});
+    gui.setRejectCallback([&] { handler->callResponse(phoneNumber, Call::rejected);});
 }
 
 void UserPort::showCallView()
