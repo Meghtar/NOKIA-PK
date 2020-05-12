@@ -1,5 +1,6 @@
 #include "ConnectedState.hpp"
 #include "NotConnectedState.hpp"
+#include "CallState.hpp"
 namespace ue
 {
 
@@ -41,6 +42,27 @@ void ConnectedState::setMessageAsRead(int msgId)
 void ConnectedState::deleteAllMessages()
 {
     context.db.removeAllMessages();
+}
+
+void ConnectedState::handleCallRequest(common::PhoneNumber number)
+{
+    using namespace std::chrono_literals;
+    context.timer.startTimer(40000ms);
+    context.user.showIncomingCallRequest(number);
+}
+
+void ConnectedState::callResponse(common::PhoneNumber number, Call isAcceptedOrRejected)
+{
+      context.bts.callResponse(number, isAcceptedOrRejected);
+      if (isAcceptedOrRejected == Call::rejected)
+      {
+          context.user.showDefaultView();
+      }
+      else
+      {
+          context.setState<CallState>();
+      }
+      context.timer.stopTimer();
 }
 
 }

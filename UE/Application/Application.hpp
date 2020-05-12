@@ -35,6 +35,8 @@ public:
     std::vector<message> retrieveMessages() override;
     void setMessageAsRead(int) override;
     void deleteAllMessages() override;
+    void handleCallRequest(common::PhoneNumber) override;
+    void callResponse(common::PhoneNumber, Call) override;
 
 private:
     Context context;
