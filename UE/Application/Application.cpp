@@ -78,8 +78,8 @@ void Application::handleCallRequest(common::PhoneNumber number)
     context.state->handleCallRequest(number);
 }
 
-void Application::callResponse(common::PhoneNumber number, Call acc)
+void Application::callResponse(common::PhoneNumber number, Call isAcceptedOrRejected)
 {
-    context.state->callResponse(number, acc);
+    context.state->callResponse(number, isAcceptedOrRejected);
 }
 }

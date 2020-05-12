@@ -25,7 +25,6 @@ public:
     // ITimerEventsHandler interface
     void handleTimeout() override;
 
-
     // IBtsEventsHandler interface
     void handleDisconnected() override;
     void handleSib(common::BtsId btsId) override;

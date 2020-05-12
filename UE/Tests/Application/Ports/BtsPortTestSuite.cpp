@@ -62,7 +62,9 @@ TEST_F(BtsPortTestSuite, shallAcceptCall)
 {
     common::BinaryMessage msg;
     EXPECT_CALL(transportMock, sendMessage(_)).WillOnce(SaveArg<0>(&msg));
+
     objectUnderTest.callResponse(receiverNumber, Call::accepted);
+
     common::IncomingMessage readmsg(msg);
     EXPECT_EQ(common::MessageId::CallAccepted, readmsg.readMessageId());
     EXPECT_EQ(PHONE_NUMBER, readmsg.readPhoneNumber());
@@ -74,7 +76,9 @@ TEST_F(BtsPortTestSuite, shallRejectCall)
 {
     common::BinaryMessage msg;
     EXPECT_CALL(transportMock, sendMessage(_)).WillOnce(SaveArg<0>(&msg));
+
     objectUnderTest.callResponse(receiverNumber, Call::rejected);
+
     common::IncomingMessage readmsg(msg);
     EXPECT_EQ(common::MessageId::CallDropped, readmsg.readMessageId());
     EXPECT_EQ(PHONE_NUMBER, readmsg.readPhoneNumber());
@@ -86,7 +90,9 @@ TEST_F(BtsPortTestSuite, shallRejectCallResponse)
 {
     common::BinaryMessage msg;
     EXPECT_CALL(transportMock, sendMessage(_)).WillOnce(SaveArg<0>(&msg));
+
     objectUnderTest.callResponse(receiverNumber, Call::rejected);
+
     common::IncomingMessage reader(msg);
     ASSERT_NO_THROW(EXPECT_EQ(common::MessageId::CallDropped, reader.readMessageId()));
     ASSERT_NO_THROW(EXPECT_EQ(PHONE_NUMBER, reader.readPhoneNumber()));
