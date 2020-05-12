@@ -2,6 +2,7 @@
 
 #include "Messages/BtsId.hpp"
 #include "Messages/PhoneNumber.hpp"
+#include "IUserPort.hpp"
 
 namespace ue
 {
@@ -26,6 +27,6 @@ public:
 
     virtual void sendAttachRequest(common::BtsId) = 0;
     virtual void sendSms(common::PhoneNumber, std::string) = 0;
-    virtual void callResponse(common::PhoneNumber, bool) = 0;
+    virtual void callResponse(common::PhoneNumber, Call) = 0;
 };
 }

@@ -109,6 +109,22 @@ TEST_F(ApplicationConnectedTestSuite, shallHandleReceiveSms)
      objectUnderTest.handleReceiveSms(receiverNumber, message);
 }
 
+TEST_F(ApplicationConnectedTestSuite, shallHandleCallRequest)
+{
+    using namespace std::chrono_literals;
+    EXPECT_CALL(userPortMock, showIncomingCallRequest(PHONE_NUMBER));
+    EXPECT_CALL(timerPortMock, startTimer(40000ms));
+    objectUnderTest.handleCallRequest(PHONE_NUMBER);
+}
+
+TEST_F(ApplicationConnectedTestSuite, shallHandleCallReject)
+{
+    EXPECT_CALL(btsPortMock, callResponse(PHONE_NUMBER, Call::rejected));
+    EXPECT_CALL(timerPortMock, stopTimer());
+    EXPECT_CALL(userPortMock, showDefaultView());
+    objectUnderTest.callResponse(PHONE_NUMBER, Call::rejected);
+}
+
 TEST_F(ApplicationConnectedTestSuite, shallShowConnectedOnAttachAccept)
 {
     // implemented in constructor of test-suite

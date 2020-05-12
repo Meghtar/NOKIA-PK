@@ -70,9 +70,9 @@ void BaseState::handleCallRequest(common::PhoneNumber number)
     logger.logError("Unexpected: handleCallRequest ", number);
 }
 
-void BaseState::callResponse(common::PhoneNumber number, bool a)
+void BaseState::callResponse(common::PhoneNumber number, Call a)
 {
-    logger.logError("Unexpected: callResponse ", number, " ", a);
+    logger.logError("Unexpected: callResponse ", number);
 }
 
 }

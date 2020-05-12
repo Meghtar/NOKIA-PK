@@ -192,14 +192,19 @@ void UserPort::showIncomingCallRequest(common::PhoneNumber number)
 {
     currentView = View::IncomingCallView;
     IUeGui::ITextMode& incomingCallView = gui.setAlertMode();
-    gui.setAcceptCallback([&] { handler->callResponse(phoneNumber, true);});
-    gui.setAcceptCallback([&] { handler->callResponse(phoneNumber, false);});
+    gui.setAcceptCallback([&] { handler->callResponse(phoneNumber, Call::accepted);});
+    gui.setAcceptCallback([&] { handler->callResponse(phoneNumber, Call::rejected);});
 }
 
 void UserPort::showCallView()
 {
     currentView = View::CallView;
     IUeGui::ICallMode& callView = gui.setCallMode();
+}
+
+void UserPort::showDefaultView()
+{
+    showMenu();
 }
 
 }

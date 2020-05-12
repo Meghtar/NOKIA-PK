@@ -45,6 +45,7 @@ public:
     void showNewSms() override;
     void showNoNewSms() override;
     void showCallView() override;
+    void showDefaultView() override;
     void showIncomingCallRequest(common::PhoneNumber) override;
 
     void showComposeSms();

@@ -51,13 +51,12 @@ void ConnectedState::handleCallRequest(common::PhoneNumber number)
     context.user.showIncomingCallRequest(number);
 }
 
-void ConnectedState::callResponse(common::PhoneNumber number, bool acc)
+void ConnectedState::callResponse(common::PhoneNumber number, Call acc)
 {
       context.bts.callResponse(number, acc);
-      if (!acc)
+      if (acc == Call::rejected)
       {
-          //if rejected show menu
-          //context.user.showMenu();
+          context.user.showDefaultView();
       }
       else
       {
