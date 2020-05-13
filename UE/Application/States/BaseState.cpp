@@ -75,4 +75,9 @@ void BaseState::callResponse(common::PhoneNumber number, Call a)
     logger.logError("Unexpected: callResponse ", number);
 }
 
+void BaseState::handleSendCallRequest(common::PhoneNumber rNumber)
+{
+    logger.logError("Unexpected: handleCallReguest", rNumber);
+}
+
 }

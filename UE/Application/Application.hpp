@@ -37,6 +37,7 @@ public:
     void deleteAllMessages() override;
     void handleCallRequest(common::PhoneNumber) override;
     void callResponse(common::PhoneNumber, Call) override;
+    void handleSendCallRequest(common::PhoneNumber) override;
 
 private:
     Context context;

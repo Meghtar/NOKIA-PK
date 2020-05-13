@@ -82,4 +82,9 @@ void Application::callResponse(common::PhoneNumber number, Call isAcceptedOrReje
 {
     context.state->callResponse(number, isAcceptedOrRejected);
 }
+
+void Application::handleSendCallRequest(common::PhoneNumber rNumber)
+{
+    context.state->handleSendCallRequest(rNumber);
+}
 }

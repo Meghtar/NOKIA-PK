@@ -120,4 +120,11 @@ void BtsPort::callResponse(common::PhoneNumber number, Call acc)
     transport.sendMessage(m.getMessage());
 }
 
+void BtsPort::sendCallRequest(common::PhoneNumber rNumber)
+{
+    logger.logDebug("callRequest", rNumber);
+    common::OutgoingMessage message{common::MessageId::CallRequest, phoneNumber, rNumber};
+    transport.sendMessage(message.getMessage());
+}
+
 }

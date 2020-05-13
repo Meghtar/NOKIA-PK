@@ -65,4 +65,11 @@ void ConnectedState::callResponse(common::PhoneNumber number, Call isAcceptedOrR
       context.timer.stopTimer();
 }
 
+void ConnectedState::handleSendCallRequest(common::PhoneNumber rNumber)
+{
+    context.bts.sendCallRequest(rNumber);
+    using namespace std::chrono_literals;
+    context.timer.startTimer(30s);
+}
+
 }
