@@ -207,4 +207,14 @@ void UserPort::showDefaultView()
     showMenu();
 }
 
+common::PhoneNumber UserPort::getNumber()
+{
+    return rNumber;
+}
+
+void UserPort::showUserNotResponding(common::PhoneNumber rNumber)
+{
+    handler->sendCallDrop(rNumber);
+}
+
 }

@@ -47,6 +47,8 @@ public:
     void showCallView() override;
     void showDefaultView() override;
     void showIncomingCallRequest(common::PhoneNumber) override;
+    void showUserNotResponding(common::PhoneNumber) override;
+    common::PhoneNumber getNumber();
 
     void showComposeSms();
     void showMenu();
@@ -54,6 +56,7 @@ public:
     void showSms(unsigned id);
 
 private:
+    common::PhoneNumber rNumber;
     common::PrefixedLogger logger;
     IUeGui& gui;
     common::PhoneNumber phoneNumber;

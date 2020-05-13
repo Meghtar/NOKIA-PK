@@ -127,4 +127,10 @@ void BtsPort::sendCallRequest(common::PhoneNumber rNumber)
     transport.sendMessage(message.getMessage());
 }
 
+void BtsPort::sendCallDrop(common::PhoneNumber rNumber)
+{
+    logger.logDebug("sendCallDrop: ", rNumber);
+    common::OutgoingMessage message{common::MessageId::CallDropped, phoneNumber, rNumber};
+}
+
 }

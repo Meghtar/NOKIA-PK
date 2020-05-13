@@ -69,7 +69,14 @@ void ConnectedState::handleSendCallRequest(common::PhoneNumber rNumber)
 {
     context.bts.sendCallRequest(rNumber);
     using namespace std::chrono_literals;
-    context.timer.startTimer(30s);
+    context.timer.startTimer(60s);
+}
+
+void ConnectedState::handleCallTimeOut()
+{
+    common::PhoneNumber rNumber = context.user.getNumber();
+    context.logger.logDebug("timeout");
+    context.user.showUserNotResponding(rNumber);
 }
 
 }
