@@ -16,7 +16,7 @@ public:
     MOCK_METHOD(void, setMessageAsRead, (int), (final));
     MOCK_METHOD(void, deleteAllMessages, (), (final));
     MOCK_METHOD(void, callResponse, (common::PhoneNumber, Call), (final));
-    //MOCK_METHOD(void, handleSendCallRequest, (common::PhoneNumber), (final));
+    MOCK_METHOD(void, handleSendCallRequest, (common::PhoneNumber), (final));
 
 };
 

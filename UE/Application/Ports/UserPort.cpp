@@ -1,6 +1,7 @@
 #include "UserPort.hpp"
 #include "UeGui/IListViewMode.hpp"
 #include "UeGui/ITextMode.hpp"
+#include "UeGui/IDialMode.hpp"
 
 #include <string>
 
@@ -78,6 +79,7 @@ void UserPort::handleAcceptClick()
                 IUeGui::IDialMode& dialView = gui.setDialMode();
                 auto number = dialView.getPhoneNumber();
                 handler->handleSendCallRequest(number);
+
             }
         case View::CallView:
             {
