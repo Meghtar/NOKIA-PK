@@ -73,6 +73,12 @@ void UserPort::handleAcceptClick()
                 showMenu();
                 break;
             }
+        case View::DialView:
+            {
+                IUeGui::IDialMode& dialView = gui.setDialMode();
+                auto number = dialView.getPhoneNumber();
+                handler->handleSendCallRequest(number);
+            }
         case View::CallView:
             {
                 IUeGui::ICallMode& callView = gui.setCallMode();
@@ -212,9 +218,9 @@ common::PhoneNumber UserPort::getNumber()
     return rNumber;
 }
 
-void UserPort::showUserNotResponding(common::PhoneNumber rNumber)
-{
-    handler->sendCallDrop(rNumber);
-}
+//void UserPort::showUserNotResponding(common::PhoneNumber rNumber)
+//{
+//    handler->sendCallDrop(rNumber);
+//}
 
 }

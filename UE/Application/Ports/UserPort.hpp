@@ -18,6 +18,7 @@ enum class View
     ListSms,
     ReadSms,
     CallView,
+    DialView,
     IncomingCallView
 };
 
@@ -47,7 +48,7 @@ public:
     void showCallView() override;
     void showDefaultView() override;
     void showIncomingCallRequest(common::PhoneNumber) override;
-    void showUserNotResponding(common::PhoneNumber) override;
+    //void showUserNotResponding(common::PhoneNumber) override;
     common::PhoneNumber getNumber();
 
     void showComposeSms();

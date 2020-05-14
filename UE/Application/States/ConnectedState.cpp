@@ -72,11 +72,11 @@ void ConnectedState::handleSendCallRequest(common::PhoneNumber rNumber)
     context.timer.startTimer(60s);
 }
 
-void ConnectedState::handleCallTimeOut()
-{
-    common::PhoneNumber rNumber = context.user.getNumber();
-    context.logger.logDebug("timeout");
-    context.user.showUserNotResponding(rNumber);
-}
+//void ConnectedState::handleCallTimeOut()
+//{
+//    common::PhoneNumber rNumber = context.user.getNumber();
+//    context.logger.logDebug("timeout");
+//    context.user.showUserNotResponding(rNumber);
+//}
 
 }
