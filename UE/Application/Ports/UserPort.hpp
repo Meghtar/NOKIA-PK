@@ -27,7 +27,8 @@ enum class Option
     ComposeSms,
     ShowSms,
     DeleteAllSms,
-    Call
+    Call,
+    Dial
 };
 
 class UserPort : public IUserPort
@@ -46,6 +47,7 @@ public:
     void showNewSms() override;
     void showNoNewSms() override;
     void showCallView() override;
+    void showDialView() override;
     void showDefaultView() override;
     void showIncomingCallRequest(common::PhoneNumber) override;
     //void showUserNotResponding(common::PhoneNumber) override;

@@ -53,7 +53,7 @@ void UserPort::handleAcceptClick()
                 }
                 else if (option == Option::Call)
                 {
-                    showCallView();
+                    showDialView();
                 }
                 break;
             }
@@ -79,7 +79,7 @@ void UserPort::handleAcceptClick()
                 IUeGui::IDialMode& dialView = gui.setDialMode();
                 auto number = dialView.getPhoneNumber();
                 handler->handleSendCallRequest(number);
-
+                showCallView();
             }
         case View::CallView:
             {
@@ -110,7 +110,7 @@ void UserPort::handleRejectClick()
         }
         case View::CallView:
         {
-            showCallView();
+            showMenu();
             break;
         }
     }
@@ -208,6 +208,12 @@ void UserPort::showCallView()
 {
     currentView = View::CallView;
     IUeGui::ICallMode& callView = gui.setCallMode();
+}
+
+void UserPort::showDialView()
+{
+    currentView = View::DialView;
+    IUeGui::IDialMode& dialView = gui.setDialMode();
 }
 
 void UserPort::showDefaultView()

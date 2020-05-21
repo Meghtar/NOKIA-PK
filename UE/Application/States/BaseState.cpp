@@ -80,6 +80,16 @@ void BaseState::handleSendCallRequest(common::PhoneNumber rNumber)
     logger.logError("Unexpected: handleCallReguest", rNumber);
 }
 
+void BaseState::handleReceiveAcceptedCall(common::PhoneNumber number)
+{
+    logger.logError("Unexpected: handleReceiveAcceptedCall" , number);
+}
+
+void BaseState::handleReceiveDroppedCall(common::PhoneNumber number)
+{
+    logger.logError("Unexpected: handleReceiveDroppedCall" , number);
+}
+
 //void BaseState::handleSendCallDrop(common::PhoneNumber rNumber)
 //{
 //    logger.logError("Unexpected: handleCallDrop", rNumber);

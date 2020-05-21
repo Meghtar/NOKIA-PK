@@ -72,6 +72,16 @@ void ConnectedState::handleSendCallRequest(common::PhoneNumber rNumber)
     context.timer.startTimer(60s);
 }
 
+void ConnectedState::handleReceiveAcceptedCall(common::PhoneNumber number)
+{
+    // TODO
+}
+
+void ConnectedState::handleReceiveDroppedCall(common::PhoneNumber number)
+{
+    // TODO
+}
+
 //void ConnectedState::handleCallTimeOut()
 //{
 //    common::PhoneNumber rNumber = context.user.getNumber();

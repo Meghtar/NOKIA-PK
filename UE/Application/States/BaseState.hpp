@@ -30,6 +30,9 @@ public:
     void handleCallRequest(common::PhoneNumber) override;
     void handleSendCallRequest(common::PhoneNumber) override;
 
+    void handleReceiveAcceptedCall(common::PhoneNumber) override;
+    void handleReceiveDroppedCall(common::PhoneNumber) override;
+
 protected:
     Context& context;
     common::PrefixedLogger logger;
