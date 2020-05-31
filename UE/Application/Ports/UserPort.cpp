@@ -1,6 +1,7 @@
 #include "UserPort.hpp"
 #include "UeGui/IListViewMode.hpp"
 #include "UeGui/ITextMode.hpp"
+#include "UeGui/IDialMode.hpp"
 
 #include <string>
 
@@ -52,7 +53,7 @@ void UserPort::handleAcceptClick()
                 }
                 else if (option == Option::Call)
                 {
-                    showCallView();
+                    showDialView();
                 }
                 break;
             }
@@ -72,6 +73,13 @@ void UserPort::handleAcceptClick()
                 smsView.clearSmsText();
                 showMenu();
                 break;
+            }
+        case View::DialView:
+            {
+                IUeGui::IDialMode& dialView = gui.setDialMode();
+                auto number = dialView.getPhoneNumber();
+                handler->handleSendCallRequest(number);
+                showCallView();
             }
         case View::CallView:
             {
@@ -102,7 +110,7 @@ void UserPort::handleRejectClick()
         }
         case View::CallView:
         {
-            showCallView();
+            showMenu();
             break;
         }
     }
@@ -202,9 +210,25 @@ void UserPort::showCallView()
     IUeGui::ICallMode& callView = gui.setCallMode();
 }
 
+void UserPort::showDialView()
+{
+    currentView = View::DialView;
+    IUeGui::IDialMode& dialView = gui.setDialMode();
+}
+
 void UserPort::showDefaultView()
 {
     showMenu();
 }
+
+common::PhoneNumber UserPort::getNumber()
+{
+    return rNumber;
+}
+
+//void UserPort::showUserNotResponding(common::PhoneNumber rNumber)
+//{
+//    handler->sendCallDrop(rNumber);
+//}
 
 }

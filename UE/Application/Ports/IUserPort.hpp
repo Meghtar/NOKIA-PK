@@ -15,10 +15,12 @@ class IUserEventsHandler
 public:
     virtual ~IUserEventsHandler() = default;
     virtual void handleSendSms(common::PhoneNumber, std::string) = 0;
+    virtual void handleSendCallRequest(common::PhoneNumber) = 0;
     virtual std::vector<message> retrieveMessages() = 0;
     virtual void setMessageAsRead(int) = 0;
     virtual void deleteAllMessages() = 0;
     virtual void callResponse(common::PhoneNumber, Call) = 0;
+    //virtual void sendCallDrop(common::PhoneNumber) = 0;
 };
 
 class IUserPort
@@ -33,7 +35,10 @@ public:
     virtual void showNoNewSms() = 0;
     virtual void showIncomingCallRequest(common::PhoneNumber) = 0;
     virtual void showCallView() = 0;
+    virtual void showDialView() = 0;
     virtual void showDefaultView() = 0;
+    //virtual void showUserNotResponding(common::PhoneNumber) = 0;
+    //virtual common::PhoneNumber getNumber() = 0;
 };
 
 }
