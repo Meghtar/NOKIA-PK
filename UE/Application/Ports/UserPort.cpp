@@ -200,8 +200,9 @@ void UserPort::showIncomingCallRequest(common::PhoneNumber number)
 {
     currentView = View::IncomingCallView;
     IUeGui::ITextMode& incomingCallView = gui.setAlertMode();
-    gui.setAcceptCallback([&] { handler->callResponse(phoneNumber, Call::accepted);});
-    gui.setRejectCallback([&] { handler->callResponse(phoneNumber, Call::rejected);});
+    incomingCallView.setText(std::to_string(number.value) + " is calling...");
+    gui.setAcceptCallback([&, number] { handler->callResponse(number, Call::accepted);});
+    gui.setRejectCallback([&, number] { handler->callResponse(number, Call::rejected);});
 }
 
 void UserPort::showCallView()

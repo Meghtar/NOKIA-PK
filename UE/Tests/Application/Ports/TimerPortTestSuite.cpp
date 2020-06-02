@@ -34,4 +34,9 @@ TEST_F(TimerPortTestSuite, shallStart)
 {
 }
 
+TEST_F(TimerPortTestSuite, shallTiemout)
+{
+
+}
+
 }

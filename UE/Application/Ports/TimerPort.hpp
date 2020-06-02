@@ -2,6 +2,7 @@
 
 #include "ITimerPort.hpp"
 #include "Logger/PrefixedLogger.hpp"
+#include <thread>
 
 namespace ue
 {
@@ -21,6 +22,9 @@ public:
 private:
     common::PrefixedLogger logger;
     ITimerEventsHandler* handler = nullptr;
+
+    std::thread timerThread;
+    void waitTillTimeout(Duration duration);
 };
 
 }

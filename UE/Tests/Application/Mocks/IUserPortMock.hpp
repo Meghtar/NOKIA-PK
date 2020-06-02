@@ -35,6 +35,7 @@ public:
     MOCK_METHOD(void, showDialView, (), (final));
     MOCK_METHOD(void, showIncomingCallRequest, (common::PhoneNumber), (final));
     MOCK_METHOD(void, showDefaultView, (), (final));
+    MOCK_METHOD(common::PhoneNumber, getNumber, (), (final));
 };
 
 }

@@ -38,7 +38,7 @@ public:
     virtual void showDialView() = 0;
     virtual void showDefaultView() = 0;
     //virtual void showUserNotResponding(common::PhoneNumber) = 0;
-    //virtual common::PhoneNumber getNumber() = 0;
+    virtual common::PhoneNumber getNumber() = 0;
 };
 
 }

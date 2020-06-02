@@ -116,7 +116,7 @@ void BtsPort::sendSms(common::PhoneNumber rNumber, std::string msg)
 
 void BtsPort::callResponse(common::PhoneNumber number, Call acc)
 {
-    logger.logDebug("CallResponse from", number);
+    logger.logDebug("CallResponse from ", number);
     common::MessageId callM;
     if (acc == Call::accepted)
     {

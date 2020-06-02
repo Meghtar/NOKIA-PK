@@ -22,7 +22,7 @@ public:
     void handleReceiveAcceptedCall(common::PhoneNumber) override;
     void handleReceiveDroppedCall(common::PhoneNumber) override;
 
-    void handleCallTimeOut();
+    void handleTimeout() override;
 };
 
 }

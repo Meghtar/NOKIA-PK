@@ -51,7 +51,7 @@ public:
     void showDefaultView() override;
     void showIncomingCallRequest(common::PhoneNumber) override;
     //void showUserNotResponding(common::PhoneNumber) override;
-    common::PhoneNumber getNumber();
+    common::PhoneNumber getNumber() override;
 
     void showComposeSms();
     void showMenu();

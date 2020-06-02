@@ -82,11 +82,11 @@ void ConnectedState::handleReceiveDroppedCall(common::PhoneNumber number)
     // TODO
 }
 
-//void ConnectedState::handleCallTimeOut()
-//{
-//    common::PhoneNumber rNumber = context.user.getNumber();
-//    context.logger.logDebug("timeout");
-//    context.user.showUserNotResponding(rNumber);
-//}
+void ConnectedState::handleTimeout()
+{
+    //common::PhoneNumber rNumber = context.user.getNumber();
+    context.timer.stopTimer();
+    //context.user.showUserNotResponding(rNumber);
+}
 
 }
