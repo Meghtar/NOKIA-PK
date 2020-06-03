@@ -2,6 +2,7 @@
 #include "UeGui/IListViewMode.hpp"
 #include "UeGui/ITextMode.hpp"
 #include "UeGui/IDialMode.hpp"
+#include "UeGui/ICallMode.hpp"
 
 #include <string>
 
@@ -84,6 +85,12 @@ void UserPort::handleAcceptClick()
         case View::CallView:
             {
                 IUeGui::ICallMode& callView = gui.setCallMode();
+                auto message = callView.getOutgoingText();
+                if(message.empty())
+                    break;
+                callView.clearOutgoingText();
+                callView.appendIncomingText("You:" + message);
+                handler->handleCallTalk(message);
                 break;
             }
     }
@@ -111,6 +118,7 @@ void UserPort::handleRejectClick()
         case View::CallView:
         {
             showMenu();
+            // shall drop call
             break;
         }
     }
@@ -209,6 +217,8 @@ void UserPort::showCallView()
 {
     currentView = View::CallView;
     IUeGui::ICallMode& callView = gui.setCallMode();
+    gui.setAcceptCallback([&]() {handleAcceptClick();});
+    gui.setRejectCallback([&]() {handleRejectClick();});
 }
 
 void UserPort::showDialView()
@@ -220,6 +230,12 @@ void UserPort::showDialView()
 void UserPort::showDefaultView()
 {
     showMenu();
+}
+
+void UserPort::showNewCallTalk(common::PhoneNumber number, std::string message)
+{
+    IUeGui::ICallMode& callView = gui.setCallMode();
+    callView.appendIncomingText(std::to_string(number.value) + ": " + message);
 }
 
 common::PhoneNumber UserPort::getNumber()

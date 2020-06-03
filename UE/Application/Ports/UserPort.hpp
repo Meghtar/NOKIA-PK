@@ -51,6 +51,7 @@ public:
     void showDefaultView() override;
     void showIncomingCallRequest(common::PhoneNumber) override;
     //void showUserNotResponding(common::PhoneNumber) override;
+    void showNewCallTalk(common::PhoneNumber, std::string) override;
     common::PhoneNumber getNumber() override;
 
     void showComposeSms();

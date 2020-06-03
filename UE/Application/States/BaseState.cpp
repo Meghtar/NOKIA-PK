@@ -82,12 +82,12 @@ void BaseState::handleSendCallRequest(common::PhoneNumber rNumber)
 
 void BaseState::handleReceiveAcceptedCall(common::PhoneNumber number)
 {
-    logger.logError("Unexpected: handleReceiveAcceptedCall " , number);
+    logger.logError("Unexpected: handleReceiveAcceptedCall ", number);
 }
 
 void BaseState::handleReceiveDroppedCall(common::PhoneNumber number)
 {
-    logger.logError("Unexpected: handleReceiveDroppedCall " , number);
+    logger.logError("Unexpected: handleReceiveDroppedCall ", number);
 }
 
 //void BaseState::handleSendCallDrop(common::PhoneNumber rNumber)
@@ -95,4 +95,13 @@ void BaseState::handleReceiveDroppedCall(common::PhoneNumber number)
 //    logger.logError("Unexpected: handleCallDrop", rNumber);
 //}
 
+void BaseState::handleCallTalk(std::string message)
+{
+    logger.logError("Unexpected: handleCallTalk");
+}
+
+void BaseState::handleReceiveCallTalk(common::PhoneNumber number, std::string message)
+{
+    logger.logError("Unexpected: handleReceiveCallTalk from", number);
+}
 }

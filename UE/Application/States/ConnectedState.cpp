@@ -13,7 +13,7 @@ ConnectedState::ConnectedState(Context &context)
 
 void ConnectedState::handleDisconnected()
 {
-    logger.logInfo("Disconnected");
+    logger.logDebug("Disconnected");
     context.setState<NotConnectedState>();
 }
 
@@ -57,10 +57,11 @@ void ConnectedState::callResponse(common::PhoneNumber number, Call isAcceptedOrR
       if (isAcceptedOrRejected == Call::rejected)
       {
           context.user.showDefaultView();
+          // something more about dropping?
       }
       else
       {
-          context.setState<CallState>();
+          context.setState<CallState>(number);
       }
       context.timer.stopTimer();
 }
@@ -74,7 +75,8 @@ void ConnectedState::handleSendCallRequest(common::PhoneNumber rNumber)
 
 void ConnectedState::handleReceiveAcceptedCall(common::PhoneNumber number)
 {
-    // TODO
+    logger.logDebug("Received accept call from: ", number);
+    context.setState<CallState>(number);
 }
 
 void ConnectedState::handleReceiveDroppedCall(common::PhoneNumber number)
@@ -84,9 +86,8 @@ void ConnectedState::handleReceiveDroppedCall(common::PhoneNumber number)
 
 void ConnectedState::handleTimeout()
 {
-    //common::PhoneNumber rNumber = context.user.getNumber();
     context.timer.stopTimer();
-    //context.user.showUserNotResponding(rNumber);
+    // TODO
 }
 
 }

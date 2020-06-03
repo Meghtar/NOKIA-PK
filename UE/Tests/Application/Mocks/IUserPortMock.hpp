@@ -17,6 +17,7 @@ public:
     MOCK_METHOD(void, deleteAllMessages, (), (final));
     MOCK_METHOD(void, callResponse, (common::PhoneNumber, Call), (final));
     MOCK_METHOD(void, handleSendCallRequest, (common::PhoneNumber), (final));
+    MOCK_METHOD(void, handleCallTalk, (std::string), (final));
 
 };
 
@@ -35,6 +36,7 @@ public:
     MOCK_METHOD(void, showDialView, (), (final));
     MOCK_METHOD(void, showIncomingCallRequest, (common::PhoneNumber), (final));
     MOCK_METHOD(void, showDefaultView, (), (final));
+    MOCK_METHOD(void, showNewCallTalk, (common::PhoneNumber, std::string), (final));
     MOCK_METHOD(common::PhoneNumber, getNumber, (), (final));
 };
 
