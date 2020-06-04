@@ -25,6 +25,7 @@ private:
 
     std::thread timerThread;
     void waitTillTimeout(Duration duration);
+    bool running;
 };
 
 }
