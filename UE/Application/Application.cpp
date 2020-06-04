@@ -98,8 +98,18 @@ void Application::handleReceiveDroppedCall(common::PhoneNumber number)
     context.state->handleReceiveDroppedCall(number);
 }
 
-//void Application::handleSendCallDrop(common::PhoneNumber rNumber)
-//{
-//    context.state->handleSendCallDrop(rNumber);
-//}
+void Application::handleSendCallDrop(common::PhoneNumber rNumber)
+{
+    context.state->handleSendCallDrop(rNumber);
+}
+
+void Application::handleCallTalk(std::string message)
+{
+    context.state->handleCallTalk(message);
+}
+
+void Application::handleReceiveCallTalk(common::PhoneNumber number, std::string message)
+{
+    context.state->handleReceiveCallTalk(number, message);
+}
 }

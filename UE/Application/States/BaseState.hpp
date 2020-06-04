@@ -29,9 +29,12 @@ public:
     void callResponse(common::PhoneNumber, Call) override;
     void handleCallRequest(common::PhoneNumber) override;
     void handleSendCallRequest(common::PhoneNumber) override;
+    void handleSendCallDrop(common::PhoneNumber) override;
 
     void handleReceiveAcceptedCall(common::PhoneNumber) override;
     void handleReceiveDroppedCall(common::PhoneNumber) override;
+    void handleCallTalk(std::string) override;
+    void handleReceiveCallTalk(common::PhoneNumber, std::string) override;
 
 protected:
     Context& context;

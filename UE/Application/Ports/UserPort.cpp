@@ -2,6 +2,7 @@
 #include "UeGui/IListViewMode.hpp"
 #include "UeGui/ITextMode.hpp"
 #include "UeGui/IDialMode.hpp"
+#include "UeGui/ICallMode.hpp"
 
 #include <string>
 
@@ -83,7 +84,7 @@ void UserPort::handleAcceptClick()
             }
         case View::CallView:
             {
-                IUeGui::ICallMode& callView = gui.setCallMode();
+                sendCallTalk();
                 break;
             }
     }
@@ -110,6 +111,7 @@ void UserPort::handleRejectClick()
         }
         case View::CallView:
         {
+            handler->handleSendCallDrop(phoneNumber);
             showMenu();
             break;
         }
@@ -200,14 +202,17 @@ void UserPort::showIncomingCallRequest(common::PhoneNumber number)
 {
     currentView = View::IncomingCallView;
     IUeGui::ITextMode& incomingCallView = gui.setAlertMode();
-    gui.setAcceptCallback([&] { handler->callResponse(phoneNumber, Call::accepted);});
-    gui.setRejectCallback([&] { handler->callResponse(phoneNumber, Call::rejected);});
+    incomingCallView.setText(std::to_string(number.value) + " is calling...");
+    gui.setAcceptCallback([&, number] { handler->callResponse(number, Call::accepted);});
+    gui.setRejectCallback([&, number] { handler->callResponse(number, Call::rejected);});
 }
 
 void UserPort::showCallView()
 {
     currentView = View::CallView;
     IUeGui::ICallMode& callView = gui.setCallMode();
+    gui.setAcceptCallback([&]() {handleAcceptClick();});
+    gui.setRejectCallback([&]() {handleRejectClick();});
 }
 
 void UserPort::showDialView()
@@ -219,6 +224,23 @@ void UserPort::showDialView()
 void UserPort::showDefaultView()
 {
     showMenu();
+}
+
+void UserPort::showNewCallTalk(common::PhoneNumber number, std::string message)
+{
+    IUeGui::ICallMode& callView = gui.setCallMode();
+    callView.appendIncomingText(std::to_string(number.value) + ": " + message);
+}
+
+void UserPort::sendCallTalk()
+{
+    IUeGui::ICallMode& callView = gui.setCallMode();
+    auto message = callView.getOutgoingText();
+    if(message.empty())
+        return;
+    callView.clearOutgoingText();
+    callView.appendIncomingText("You: " + message);
+    handler->handleCallTalk(message);
 }
 
 common::PhoneNumber UserPort::getNumber()

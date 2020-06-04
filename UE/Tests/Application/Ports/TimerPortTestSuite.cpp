@@ -34,4 +34,23 @@ TEST_F(TimerPortTestSuite, shallStart)
 {
 }
 
+TEST_F(TimerPortTestSuite, shallTiemout)
+{
+    EXPECT_CALL(handlerMock, handleTimeout());
+
+    auto tmp = std::chrono::duration<int>(1);
+    objectUnderTest.startTimer(tmp);
+    std::this_thread::sleep_for(2 * tmp);
+}
+
+TEST_F(TimerPortTestSuite, shallNotTiemoutAfterStopingTimer)
+{
+    EXPECT_CALL(handlerMock, handleTimeout()).Times(0);
+
+    auto tmp = std::chrono::duration<int>(1);
+    objectUnderTest.startTimer(tmp);
+    objectUnderTest.stopTimer();
+    std::this_thread::sleep_for(2 * tmp);
+}
+
 }

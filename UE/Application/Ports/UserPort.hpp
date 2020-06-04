@@ -51,12 +51,15 @@ public:
     void showDefaultView() override;
     void showIncomingCallRequest(common::PhoneNumber) override;
     //void showUserNotResponding(common::PhoneNumber) override;
-    common::PhoneNumber getNumber();
+    void showNewCallTalk(common::PhoneNumber, std::string) override;
+    common::PhoneNumber getNumber() override;
 
     void showComposeSms();
     void showMenu();
     void showSmsList();
     void showSms(unsigned id);
+
+    void sendCallTalk();
 
 private:
     common::PhoneNumber rNumber;

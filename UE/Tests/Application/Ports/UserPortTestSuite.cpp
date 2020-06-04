@@ -20,6 +20,7 @@ protected:
     StrictMock<IUeGuiMock> guiMock;
     StrictMock<IListViewModeMock> listViewModeMock;
     StrictMock<ISmsComposeModeMock> smsComposeModeMock;
+    StrictMock<ICallModeMock> callViewModeMock;
 
     IUeGui::Callback acceptCallback;
     IUeGui::Callback rejectCallback;
@@ -102,5 +103,29 @@ TEST_F(UserPortTestSuite, shallShowEmptySmsList)
     // No messages are retrieved so addSelectionListItem will not be called
 
     objectUnderTest.showSmsList();
+}
+
+TEST_F(UserPortTestSuite, shallShowSentNewCallTalk)
+{
+    std::string testMessage = "testMessage";
+    std::string incommingMessage = "You: " + testMessage;
+
+    EXPECT_CALL(guiMock, setCallMode()).WillOnce(ReturnRef(callViewModeMock));
+    EXPECT_CALL(callViewModeMock, getOutgoingText()).WillOnce(Return(testMessage));
+    EXPECT_CALL(callViewModeMock, clearOutgoingText());
+    EXPECT_CALL(callViewModeMock, appendIncomingText(incommingMessage));
+    EXPECT_CALL(handlerMock, handleCallTalk(testMessage));
+
+    objectUnderTest.sendCallTalk();
+}
+
+TEST_F(UserPortTestSuite, shallShowReceivedNewCallTalk)
+{
+    auto testMessage = "testMessage";
+
+    EXPECT_CALL(guiMock, setCallMode()).WillOnce(ReturnRef(callViewModeMock));
+    EXPECT_CALL(callViewModeMock, appendIncomingText(std::to_string(PHONE_NUMBER.value) + ": " + testMessage));
+
+    objectUnderTest.showNewCallTalk(PHONE_NUMBER, testMessage);
 }
 }

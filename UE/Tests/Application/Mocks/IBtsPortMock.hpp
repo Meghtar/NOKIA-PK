@@ -23,6 +23,7 @@ public:
     MOCK_METHOD(void, handleReceiveAcceptedCall, (common::PhoneNumber), (final));
     MOCK_METHOD(void, handleReceiveDroppedCall, (common::PhoneNumber), (final));
     //MOCK_METHOD(void, handleSendCallRequest, (common::PhoneNumber), (final));
+    MOCK_METHOD(void, handleReceiveCallTalk, (common::PhoneNumber, std::string), (final));
 
 };
 
@@ -36,6 +37,8 @@ public:
     MOCK_METHOD(void, sendSms, (common::PhoneNumber, std::string), (final));
     MOCK_METHOD(void, callResponse, (common::PhoneNumber, Call), ());
     MOCK_METHOD(void, sendCallRequest, (common::PhoneNumber), (final));
+    MOCK_METHOD(void, sendCallTalk, (std::string, common::PhoneNumber), (final));
+    MOCK_METHOD(void, sendCallDrop, (common::PhoneNumber), (final));
 };
 
 }

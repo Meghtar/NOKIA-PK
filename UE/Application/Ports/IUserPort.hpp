@@ -20,6 +20,8 @@ public:
     virtual void setMessageAsRead(int) = 0;
     virtual void deleteAllMessages() = 0;
     virtual void callResponse(common::PhoneNumber, Call) = 0;
+    virtual void handleCallTalk(std::string) = 0;
+    virtual void handleSendCallDrop(common::PhoneNumber) = 0;
     //virtual void sendCallDrop(common::PhoneNumber) = 0;
 };
 
@@ -37,8 +39,9 @@ public:
     virtual void showCallView() = 0;
     virtual void showDialView() = 0;
     virtual void showDefaultView() = 0;
+    virtual void showNewCallTalk(common::PhoneNumber, std::string) = 0;
     //virtual void showUserNotResponding(common::PhoneNumber) = 0;
-    //virtual common::PhoneNumber getNumber() = 0;
+    virtual common::PhoneNumber getNumber() = 0;
 };
 
 }
