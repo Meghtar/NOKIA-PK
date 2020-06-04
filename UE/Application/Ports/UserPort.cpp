@@ -84,13 +84,7 @@ void UserPort::handleAcceptClick()
             }
         case View::CallView:
             {
-                IUeGui::ICallMode& callView = gui.setCallMode();
-                auto message = callView.getOutgoingText();
-                if(message.empty())
-                    break;
-                callView.clearOutgoingText();
-                callView.appendIncomingText("You:" + message);
-                handler->handleCallTalk(message);
+                sendCallTalk();
                 break;
             }
     }
@@ -236,6 +230,17 @@ void UserPort::showNewCallTalk(common::PhoneNumber number, std::string message)
 {
     IUeGui::ICallMode& callView = gui.setCallMode();
     callView.appendIncomingText(std::to_string(number.value) + ": " + message);
+}
+
+void UserPort::sendCallTalk()
+{
+    IUeGui::ICallMode& callView = gui.setCallMode();
+    auto message = callView.getOutgoingText();
+    if(message.empty())
+        return;
+    callView.clearOutgoingText();
+    callView.appendIncomingText("You: " + message);
+    handler->handleCallTalk(message);
 }
 
 common::PhoneNumber UserPort::getNumber()

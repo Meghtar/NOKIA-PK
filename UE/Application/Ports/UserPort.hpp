@@ -59,6 +59,8 @@ public:
     void showSmsList();
     void showSms(unsigned id);
 
+    void sendCallTalk();
+
 private:
     common::PhoneNumber rNumber;
     common::PrefixedLogger logger;
