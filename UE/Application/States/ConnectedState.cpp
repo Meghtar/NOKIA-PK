@@ -95,7 +95,8 @@ void ConnectedState::handleReceiveDroppedCall(common::PhoneNumber number)
 void ConnectedState::handleTimeout()
 {
     context.timer.stopTimer();
-    // TODO
+    context.logger.logError("timeout");
+    context.user.showDefaultView();
 }
 
 }

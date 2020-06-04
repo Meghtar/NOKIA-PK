@@ -23,7 +23,6 @@ public:
     void handleReceiveAcceptedCall(common::PhoneNumber) override;
     void handleReceiveDroppedCall(common::PhoneNumber) override;
 
-
     void handleTimeout() override;
 };
 
