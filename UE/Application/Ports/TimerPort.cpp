@@ -24,11 +24,13 @@ void TimerPort::stop()
 void TimerPort::startTimer(Duration duration)
 {
     logger.logDebug("Start timer: ", duration.count(), "ms");
+    running = true;
     timerThread = std::thread {&TimerPort::waitTillTimeout, this, duration};
 }
 
 void TimerPort::stopTimer()
 {
+    running = false;
     logger.logDebug("Stop timer");
     if(timerThread.joinable())
         timerThread.detach();
@@ -37,6 +39,8 @@ void TimerPort::stopTimer()
 void TimerPort::waitTillTimeout(Duration duration)
 {
     std::this_thread::sleep_for(duration);
+    if (!running)
+        return;
     handler->handleTimeout();
 }
 
