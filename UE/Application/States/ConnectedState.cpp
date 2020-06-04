@@ -83,6 +83,8 @@ void ConnectedState::handleSendCallDrop(common::PhoneNumber number)
     context.logger.logDebug("Call dropped! ", number);
     context.timer.stopTimer();
     context.bts.sendCallDrop(number);
+    context.setState<ConnectedState>();
+    context.user.showConnected();
 }
 
 void ConnectedState::handleReceiveDroppedCall(common::PhoneNumber number)
@@ -90,12 +92,13 @@ void ConnectedState::handleReceiveDroppedCall(common::PhoneNumber number)
     context.logger.logDebug("Recieved call dropped! ", number);
     context.timer.stopTimer();
     context.user.showConnected();
+    context.setState<ConnectedState>();
 }
 
 void ConnectedState::handleTimeout()
 {
     context.timer.stopTimer();
-    context.logger.logError("timeout");
+    context.logger.logError("user not responding");
     context.user.showDefaultView();
 }
 
