@@ -117,8 +117,8 @@ void UserPort::handleRejectClick()
         }
         case View::CallView:
         {
+            handler->handleSendCallDrop(phoneNumber);
             showMenu();
-            // shall drop call
             break;
         }
     }

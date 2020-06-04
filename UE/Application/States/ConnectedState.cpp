@@ -78,10 +78,18 @@ void ConnectedState::handleReceiveAcceptedCall(common::PhoneNumber number)
     logger.logDebug("Received accept call from: ", number);
     context.setState<CallState>(number);
 }
+void ConnectedState::handleSendCallDrop(common::PhoneNumber number)
+{
+    context.logger.logDebug("Call dropped! ", number);
+    context.timer.stopTimer();
+    context.bts.sendCallDrop(number);
+}
 
 void ConnectedState::handleReceiveDroppedCall(common::PhoneNumber number)
 {
-    // TODO
+    context.logger.logDebug("Recieved call dropped! ", number);
+    context.timer.stopTimer();
+    context.user.showConnected();
 }
 
 void ConnectedState::handleTimeout()

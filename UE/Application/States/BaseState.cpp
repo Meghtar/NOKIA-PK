@@ -90,10 +90,10 @@ void BaseState::handleReceiveDroppedCall(common::PhoneNumber number)
     logger.logError("Unexpected: handleReceiveDroppedCall ", number);
 }
 
-//void BaseState::handleSendCallDrop(common::PhoneNumber rNumber)
-//{
-//    logger.logError("Unexpected: handleCallDrop", rNumber);
-//}
+void BaseState::handleSendCallDrop(common::PhoneNumber rNumber)
+{
+    logger.logError("Unexpected: handleCallDrop", rNumber);
+}
 
 void BaseState::handleCallTalk(std::string message)
 {

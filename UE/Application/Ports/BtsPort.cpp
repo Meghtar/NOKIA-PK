@@ -154,10 +154,11 @@ void BtsPort::sendCallTalk(std::string text, common::PhoneNumber number)
     transport.sendMessage(message.getMessage());
 }
 
-//void BtsPort::sendCallDrop(common::PhoneNumber rNumber)
-//{
-//    logger.logDebug("sendCallDrop: ", rNumber);
-//    common::OutgoingMessage message{common::MessageId::CallDropped, phoneNumber, rNumber};
-//}
+void BtsPort::sendCallDrop(common::PhoneNumber rNumber)
+{
+    logger.logDebug("sendCallDrop: ", rNumber);
+    common::OutgoingMessage message{common::MessageId::CallDropped, phoneNumber, rNumber};
+    transport.sendMessage(message.getMessage());
+}
 
 }

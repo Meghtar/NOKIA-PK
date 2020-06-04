@@ -21,6 +21,7 @@ public:
     virtual void deleteAllMessages() = 0;
     virtual void callResponse(common::PhoneNumber, Call) = 0;
     virtual void handleCallTalk(std::string) = 0;
+    virtual void handleSendCallDrop(common::PhoneNumber) = 0;
     //virtual void sendCallDrop(common::PhoneNumber) = 0;
 };
 
